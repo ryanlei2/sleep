@@ -1,3 +1,7 @@
-# Authentication in Next.js with Firebase
+# Running Coursee
 
-[click here for a video tutorial](https://www.youtube.com/watch?v=ZmpO65DhRN0)
+Because this dynamic website does not have a domain associated with it, just download it, cd into it, and type npm run dev into the terminal:
+
+```
+npm run dev
+```
