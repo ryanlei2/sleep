@@ -12,7 +12,10 @@ const NavbarComp = () => {
     <Navbar bg="light" expand="lg">
       <Container>
         <Link href="/" passHref>
-          <Navbar.Brand>Home</Navbar.Brand>
+          <Nav.Link>Home&emsp;&emsp;</Nav.Link>
+        </Link>
+        <Link href="/dashboard" passHref>
+          <Nav.Link>Dashboard&ensp;</Nav.Link>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -25,7 +28,7 @@ const NavbarComp = () => {
                     router.push('/login')
                   }}
                 >
-                  Logout
+                  &emsp;Logout
                 </Nav.Link>
               </div>
             ) : (
@@ -36,6 +39,7 @@ const NavbarComp = () => {
                 <Link href="/login" passHref>
                   <Nav.Link>Login</Nav.Link>
                 </Link>
+                
               </>
             )}
           </Nav>
