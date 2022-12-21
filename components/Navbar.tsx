@@ -10,18 +10,18 @@ const NavbarComp = () => {
 
   return (
     <Navbar bg="light" expand="lg">
-      <Container>
+      <Container className='navbar'>
         <Link href="/" passHref>
-          <Nav.Link>Home&emsp;&emsp;</Nav.Link>
+          <Nav.Link><img src='https://i.imgur.com/yVyveSz.png' width="50px" height="50px"></img>&emsp;</Nav.Link>
         </Link>
         <Link href="/dashboard" passHref>
-          <Nav.Link>Dashboard&emsp;&ensp;</Nav.Link>
+          <Nav.Link>Dashboard</Nav.Link>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {user ? (
-              <div>
+              <div className='logOutBtn'>
                 <Nav.Link
                   onClick={() => {
                     logout()
