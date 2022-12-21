@@ -18,7 +18,6 @@ const Login = () => {
     try {
       await login(data.email, data.password)
       router.push('/dashboard')
-      //show dashboard button
     } catch (err) {
       console.log(err)
     }

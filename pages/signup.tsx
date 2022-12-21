@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useAuth } from '../context/AuthContext'
 
+
 const Signup = () => {
   const { user, signup } = useAuth()
   console.log(user)
@@ -17,6 +18,8 @@ const Signup = () => {
       await signup(data.email, data.password)
     } catch (err) {
       console.log(err)
+      //here set something like email alreayd in use with if statement
+
     }
 
     console.log(data)
@@ -66,6 +69,7 @@ const Signup = () => {
         <Button variant="primary" type="submit">
           Signup
         </Button>
+        <p></p>
       </Form>
     </div>
   )

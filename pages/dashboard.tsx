@@ -5,8 +5,10 @@ const Dashboard = () => {
   return (
     <>
       <div className='dashboardMain'>
-        First time using Coursee? Take our survey!<br></br>
-        <button className="surveyBtn" role="button">Survey</button>
+        <i><b>First</b></i> time using Coursee or having trouble deciding on a path? Take our survey!<br></br>
+        <a href="/survey">
+          <button className="surveyBtn" role="button">Survey</button>
+        </a>
       </div>
     </>
   )

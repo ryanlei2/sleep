@@ -15,7 +15,7 @@ const NavbarComp = () => {
           <Nav.Link>Home&emsp;&emsp;</Nav.Link>
         </Link>
         <Link href="/dashboard" passHref>
-          <Nav.Link>Dashboard&ensp;</Nav.Link>
+          <Nav.Link>Dashboard&emsp;&ensp;</Nav.Link>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -34,7 +34,7 @@ const NavbarComp = () => {
             ) : (
               <>
                 <Link href="/signup" passHref>
-                  <Nav.Link>Signup</Nav.Link>
+                  <Nav.Link>Signup&emsp;&ensp;</Nav.Link>
                 </Link>
                 <Link href="/login" passHref>
                   <Nav.Link>Login</Nav.Link>
