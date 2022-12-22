@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { StylesManager, Survey } from 'survey-react';
 import "survey-core/defaultV2.css";
-
+import firebase from "firebase/app"
+import "firebase/database"
 
 StylesManager.applyTheme("defaultV2");
 const surveyJSON = {
@@ -656,6 +657,8 @@ function SurveyComp() {
   const handleComplete = (survey: { data: React.SetStateAction<null>; }) => {
     console.log(survey.data);
     setResults(survey.data);
+    //give rsults to firebase
+
   };
 
   return <Survey json={surveyJSON} onComplete={handleComplete} />;
