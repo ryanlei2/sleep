@@ -1,3 +1,4 @@
+import router from 'next/router'
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useAuth } from '../context/AuthContext'
@@ -16,6 +17,7 @@ const Signup = () => {
 
     try {
       await signup(data.email, data.password)
+      router.push('/dashboard')
     } catch (err) {
       console.log(err)
       //here set something like email alreayd in use with if statement
