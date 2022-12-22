@@ -19,18 +19,18 @@ const NavbarComp = () => {
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className='container-fluid'>
             {user ? (
-              <div className='logOutBtn'>
+              <Nav.Item className="ms-auto">
                 <Nav.Link
                   onClick={() => {
                     logout()
                     router.push('/login')
                   }}
                 >
-                  &emsp;Logout
+                  Logout
                 </Nav.Link>
-              </div>
+              </Nav.Item>
             ) : (
               <>
                 <Link href="/signup" passHref>
