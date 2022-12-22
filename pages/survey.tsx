@@ -1,9 +1,13 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
 import SurveyComp from '../components/SurveyComp'
 
 export default function Survey() {
   return (
-    <SurveyComp />
+    <Container className="mx-auto">
+      <SurveyComp />
+    </Container>
+    
   )
 }
 
