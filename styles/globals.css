@@ -8,14 +8,13 @@ body {
 
 .navbar {
   font-size: 30px;
-  margin-left: 100px;
   margin-top: 15px;
-  display: flex;
 }
 
 .indexContainer {
   margin-top: 40px;
   margin-left: 100px;
+  margin-right: 100px;
 }
 
 .logOutBtn {
@@ -29,10 +28,8 @@ body {
   font-size: 1.5rem;
 }
 
-.dashboardMain {
-  color: rgb(92, 91, 91);
+.bodyText {
   margin-top: 30px;
-  margin-left: 100px;
   font-size: 1.5rem;
 }
 

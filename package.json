@@ -18,6 +18,7 @@
     "survey-core": "latest",
     "survey-creator-core": "latest",
     "survey-creator-react": "latest",
+    "survey-react": "^1.9.65",
     "survey-react-ui": "^1.9.65"
   },
   "devDependencies": {
