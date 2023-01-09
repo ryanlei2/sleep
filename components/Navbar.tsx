@@ -3,8 +3,6 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/router'
-import Image from 'next/image';
-import favicon from '../assets/favicon.ico'
 
 const NavbarComp = () => {
   const { user, logout } = useAuth()
@@ -14,15 +12,7 @@ const NavbarComp = () => {
     <Navbar bg = "light" expand = "lg">
       <Container>
         <Link href="/" passHref>
-          <Nav.Link>
-            <Image 
-              src={favicon}
-              alt='logo'
-              width="50px"
-              height="50px"
-            />
-            &emsp;
-            </Nav.Link>
+          <Nav.Link><img src='https://i.imgur.com/yVyveSz.png' width="50px" height="50px"></img>&emsp;</Nav.Link>
         </Link>
         <Link href="/dashboard" passHref>
           <Nav.Link>Dashboard&emsp;&emsp;</Nav.Link>
