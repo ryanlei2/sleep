@@ -7,6 +7,7 @@ import "firebase/database"
 
 StylesManager.applyTheme("defaultV2");
 const surveyJSON = {
+  //copy paste survey from surveyJS creator
     "title": "Career Survey",
     "description": "Give us some general knowledge on the career you want to choose.",
     "logoPosition": "right",
