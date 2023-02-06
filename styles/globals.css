@@ -1,20 +1,9 @@
 html,
 body {
   padding: 0;
-  margin: 0;
+  margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-.navbar {
-  font-size: 30px;
-  margin-top: 15px;
-}
-
-.indexContainer {
-  margin-top: 40px;
-  margin-left: 100px;
-  margin-right: 100px;
 }
 
 .logOutBtn {
@@ -84,4 +73,7 @@ a {
 
 * {
   box-sizing: border-box;
+  border: 0;
+  padding: 0;
+  margin: 0;
 }

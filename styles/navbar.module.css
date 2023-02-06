@@ -1,0 +1,14 @@
+.navbar {
+    background-color: #f8f8f8;
+    margin: 0;
+    z-index: 1;
+    font-size: 1.7rem;
+    width: 100%;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

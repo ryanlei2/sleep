@@ -5,14 +5,16 @@ import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/router'
 import Image from 'next/image';
 import favicon from '../assets/favicon.ico'
+import styles from '../styles/navbar.module.css'
+
 
 const NavbarComp = () => {
   const { user, logout } = useAuth()
   const router = useRouter()
 
   return (
-    <Navbar bg = "light" expand = "lg">
-      <Container>
+    <Navbar className={styles.navbar} expand = 'lg'>
+      <Container className={styles.container}>
         <Link href="/" passHref>
           <Nav.Link>
             <Image 
@@ -25,7 +27,24 @@ const NavbarComp = () => {
             </Nav.Link>
         </Link>
         <Link href="/dashboard" passHref>
-          <Nav.Link>Dashboard&emsp;&emsp;</Nav.Link>
+          <Nav.Link
+          >
+            {user ? (
+              <Nav.Item className="ms-auto">
+                <Nav.Link
+                  onClick={() => {
+                    router.push('/dashboard')
+                  }}
+                >
+                  Dashboard
+                </Nav.Link>
+              </Nav.Item>
+            ) : (
+              <>
+              </>
+            )}
+          </Nav.Link>
+          {/* dont use emsp make this css (you know how) */}
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -43,13 +62,11 @@ const NavbarComp = () => {
               </Nav.Item>
             ) : (
               <>
-                <Link href="/signup" passHref>
-                  <Nav.Link>Signup&emsp;&ensp;</Nav.Link>
-                </Link>
-                <Link href="/login" passHref>
-                  <Nav.Link>Login</Nav.Link>
-                </Link>
-                
+                <Nav.Item className='ms-auto'>
+                  <Nav.Link href='/login'>
+                    Login
+                  </Nav.Link>
+                </Nav.Item>
               </>
             )}
           </Nav>
