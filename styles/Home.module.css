@@ -4,16 +4,16 @@
   width: 100%;
 }
 
-
 .homeTitle {
-  font-size: 45px;
   margin-bottom: 100px;
-  margin-top: 80px;
   text-align: center;
 }
 
+.heroImg{
+  padding-top: 30px;
+}
 .heroBanner {
-  position: fixed;
+  position: absolute;
   z-index: -1;
 }
 
@@ -27,9 +27,38 @@
 }
 
 .homeBodyTitle {
-  margin-top: 150px;
+  margin-top: 200px;
+  text-align: center;
+  font-weight: 300;
+  font-size: 3vw;
 }
 
-.buttons {
-  
+.buttonsContainer {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.button {
+  width: 20vw;
+  max-width: 300px;
+  max-height: 300px;
+  height: 20vw;
+  font-size: max(3vw, 3vh);
+  margin-right: 3rem;
+  background-color: #8AB6D6;
+  color: rgb(64, 64, 64);
+}
+
+.button2 {
+  width: 20vw;
+  max-width: 300px;
+  max-height: 300px;
+  height: 20vw;
+  font-size: max(3vw, 3vh);
+  background-color: #2978B5;
+  color: rgb(0, 0, 0);
+}
+
+.getStartedBtn {
+  margin-top: 0;
 }

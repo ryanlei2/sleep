@@ -14,17 +14,17 @@ const NavbarComp = () => {
 
   return (
     <Navbar className={styles.navbar} expand = 'lg'>
-      <Container className={styles.container}>
-        <Link href="/" passHref>
-          <Nav.Link>
+      <Container>
+        <Link href="/" className={styles.logo} passHref>
+          <Navbar.Brand>
             <Image 
               src={favicon}
               alt='logo'
-              width="50px"
-              height="50px"
+              width={70}
+              height={70}
+              
             />
-            &emsp;
-            </Nav.Link>
+            </Navbar.Brand>
         </Link>
         <Link href="/dashboard" passHref>
           <Nav.Link
@@ -45,6 +45,11 @@ const NavbarComp = () => {
             )}
           </Nav.Link>
           {/* dont use emsp make this css (you know how) */}
+        </Link>
+        <Link href="/dashboard" passHref>
+          <Nav.Link>
+              about
+          </Nav.Link>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
