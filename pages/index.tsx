@@ -27,7 +27,7 @@ const Home: NextPage = () => {
       <div className={styles.homeTitle}>
         <b className={styles.bannerTitle}>Let&apos;s Plan Together</b>
         <br></br><p className={styles.bannerSubtext}>We&apos;re on a mission to help every student choose the right path.</p>
-        <Link href="/signup" passHref>
+        <Link href="/signup" passHref legacyBehavior>
           <Button className={styles.getStartedBtn}>
             Get Started
           </Button>
@@ -43,7 +43,7 @@ const Home: NextPage = () => {
 
       </Container>
     </div>
-  )
+  );
 }
 
 export default Home

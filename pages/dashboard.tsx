@@ -9,15 +9,14 @@ const Dashboard = () => {
       <Container>
         <i><b>First</b></i> time using Coursee or having trouble deciding on a path? Take our survey!<br></br>
         <Link href="/survey">
-          <a>
+
           <button className="surveyBtn" role="button">Survey</button>
-          </a>
+
         </Link>
         
       </Container>
     </div>
-      
-  )
+  );
 }
 
 

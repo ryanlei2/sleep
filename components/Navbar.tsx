@@ -15,7 +15,7 @@ const NavbarComp = () => {
   return (
     <Navbar className={styles.navbar} expand = 'lg'>
       <Container>
-        <Link href="/" className={styles.logo} passHref>
+        <Link href="/" className={styles.logo} passHref legacyBehavior>
           <Navbar.Brand>
             <Image 
               src={favicon}
@@ -26,7 +26,7 @@ const NavbarComp = () => {
             />
             </Navbar.Brand>
         </Link>
-        <Link href="/dashboard" passHref>
+        <Link href="/dashboard" passHref legacyBehavior>
           <Nav.Link
           >
             {user ? (
@@ -46,7 +46,7 @@ const NavbarComp = () => {
           </Nav.Link>
           {/* dont use emsp make this css (you know how) */}
         </Link>
-        <Link href="/dashboard" passHref>
+        <Link href="/dashboard" passHref legacyBehavior>
           <Nav.Link>
               about
           </Nav.Link>
@@ -78,7 +78,7 @@ const NavbarComp = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  )
+  );
 }
 
 export default NavbarComp
