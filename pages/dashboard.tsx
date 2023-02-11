@@ -5,7 +5,7 @@ import styles from '../styles/dashboard.module.css'
 import Link from 'next/link';
 const Dashboard = () => {
   return (
-    <div className="bodyText">
+    <div className={styles.body}>
       <Container>
         <i><b>First</b></i> time using Coursee or having trouble deciding on a path? Take our survey!<br></br>
         <Link href="/survey">

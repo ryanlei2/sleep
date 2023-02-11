@@ -1,16 +1,11 @@
-.navbar {
-    background-color: #f8f8f8;
-    margin: 0;
-    z-index: 1;
-    font-size: 2rem;
-    width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-    padding-right: 0;
+.navBar {
+    z-index: 3;
+    background-color: #f1f1f1;
+}
+@media screen and (min-width: 380px) {
     
 }
 
-.container {
-    display: flex;
+.Nav.Link[aria-current] {
+    background-color: black;
 }

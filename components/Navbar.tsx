@@ -7,77 +7,109 @@ import Image from 'next/image';
 import favicon from '../assets/favicon.ico'
 import styles from '../styles/navbar.module.css'
 
-
 const NavbarComp = () => {
   const { user, logout } = useAuth()
   const router = useRouter()
 
   return (
-    <Navbar className={styles.navbar} expand = 'lg'>
-      <Container>
-        <Link href="/" className={styles.logo} passHref legacyBehavior>
-          <Navbar.Brand>
+
+      <Navbar expand="sm" className={styles.navBar} sticky='top'> 
+        <Link href="/"  passHref legacyBehavior>
+          <Nav.Link className='ms-5 me-5' 
+          // style={{
+          //   marginLeft:'50px',
+          //   // marginRight:'70px',
+          // }}
+          > 
+          <div >
             <Image 
+              width="90" height="90"
               src={favicon}
               alt='logo'
-              width={70}
-              height={70}
-              
             />
-            </Navbar.Brand>
+          </div>
+          </Nav.Link>
         </Link>
-        <Link href="/dashboard" passHref legacyBehavior>
-          <Nav.Link
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse>
+          <Nav
           >
             {user ? (
-              <Nav.Item className="ms-auto">
-                <Nav.Link
+              <Nav.Item className="ms-auto display-6">
+                <Nav.Link className='me-5'
                   onClick={() => {
                     router.push('/dashboard')
                   }}
                 >
-                  Dashboard
+                  dashboard
                 </Nav.Link>
               </Nav.Item>
             ) : (
               <>
               </>
             )}
-          </Nav.Link>
+          </Nav>
           {/* dont use emsp make this css (you know how) */}
-        </Link>
-        <Link href="/dashboard" passHref legacyBehavior>
-          <Nav.Link>
-              about
-          </Nav.Link>
-        </Link>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className='container-fluid'>
+
+        <Nav className='container-fluid'>
             {user ? (
-              <Nav.Item className="ms-auto">
-                <Nav.Link
-                  onClick={() => {
-                    logout()
-                    router.push('/login')
-                  }}
-                >
-                  Logout
-                </Nav.Link>
-              </Nav.Item>
+              <>
+              </>//if not logged in show btn
             ) : (
               <>
-                <Nav.Item className='ms-auto'>
-                  <Nav.Link href='/login'>
-                    Login
+                <Nav.Item className='display-4 ms-auto'>
+                  <Nav.Link href='/about' className='ms-5' aria-current="page">
+                    about
                   </Nav.Link>
                 </Nav.Item>
               </>
             )}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+        </Nav>
+        <Nav className='container-fluid'>
+            {user ? (
+              <>
+              </>//if not logged in show btn
+            ) : (
+              <>
+                <Nav.Item className='display-4 ms-auto'>
+                  <Nav.Link href='/faq' className='me-5' aria-current="page"
+                  >
+                    FAQ
+                  </Nav.Link>
+                </Nav.Item>
+              </>
+            )}
+        </Nav>
+        <Nav className='container-fluid'>
+          {user ? (
+            <Nav.Item className="ms-auto display-6">
+              <Nav.Link className='ms-5'
+                onClick={() => {
+                  logout()
+                  router.push('/login')
+                }}
+              >
+                logout
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            <>
+              <Nav.Item className='ms-auto display-4'>
+                <Nav.Link href='/login' className='ms-5 me-5' aria-current="page"
+                // style={{
+                //   marginRight:'50px',
+                //   // marginLeft:'70px',
+                // }}
+                >
+                  login
+                </Nav.Link>
+              </Nav.Item>
+            </>
+          )}
+        </Nav> 
+          </Navbar.Collapse>
     </Navbar>
+    // </div>
   );
 }
 

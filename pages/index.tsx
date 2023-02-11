@@ -1,48 +1,68 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import { Button, Container } from 'react-bootstrap'
+import { Button, Card, Container } from 'react-bootstrap'
 import styles from '../styles/home.module.css'
 import banner from '../assets/banner.png'
 import Link from 'next/link'
 import { IBM_Plex_Sans } from '@next/font/google'
+import { useAuth } from '../context/AuthContext'
+import { useRouter } from 'next/router'
+
 
 const Home: NextPage = () => {
   function handleClick() {
     console.log('increment like count');
   }
+  const { user, logout } = useAuth()
+  const router = useRouter()
 
   return (
     <div>
-      <Container>
-        <div className={styles.heroImg}>
-          <Image className={styles.heroBanner}
+      
+      {/* <div className='' >
+        <Image 
               src={banner}
-              fill
-              objectFit='cover'
               alt='Brand logo'
+              fill
             />
+      </div> */}
+        
+        <div className={styles.banner}>
+          <b className={styles.bannerTitle}>Let&apos;s Plan Together</b>
+          <br></br>
+          <p className={styles.bannerSubtext}>We&apos;re on a mission to help every student choose the right path.</p>
+          
+            <Link href={"/signup"}
+            className={styles.getStartedBtn} 
+            legacyBehavior>
+              <a className={styles.bannerButton}
+                onClick={() => {
+                  {user ? (
+                    router.push('/survey')
+                  ) : (
+                    router.push('/signup')
+                  )}
+                    
+                  }} 
+              >Get Started</a>
+              {/* 
+              
+              */}
+            </Link>
+      </div>
+      
+      <div
+      style={{
+        width: '40%',
+        margin: 'auto',
+      }}> 
+        <h2 className="display-1 text-center my-3 ">Unsure about your class selection?</h2>
+      </div>
+        <div className={styles.buttonsContainer}>
+          <Button className={styles.button}>Course Catalog</Button>
+          <Button className={styles.button2}>FAQ</Button>
         </div>
-        {/* ^ must be cropped, image whitespacce treated as image still */}
-      <div className={styles.homeTitle}>
-        <b className={styles.bannerTitle}>Let&apos;s Plan Together</b>
-        <br></br><p className={styles.bannerSubtext}>We&apos;re on a mission to help every student choose the right path.</p>
-        <Link href="/signup" passHref legacyBehavior>
-          <Button className={styles.getStartedBtn}>
-            Get Started
-          </Button>
-        </Link>
-      </div>
-      <h2 className={styles.homeBodyTitle}>Unsure about your class selection?</h2>
-
-      <div className={styles.buttonsContainer}>
-        <Button className={styles.button}>Course Catalog</Button>
-        <Button className={styles.button2}>FAQ</Button>
-      </div>
-
-
-      </Container>
     </div>
+      
   );
 }
 

@@ -1,5 +1,7 @@
-.logOutBtn {
-  /* margin-left: 600px; */
+html,
+body {
+  padding: 0;
+  margin: 0;
 }
 
 .survey {
@@ -9,10 +11,6 @@
   font-size: 1.5rem;
 }
 
-.bodyText {
-  margin-top: 30px;
-  font-size: 1.5rem;
-}
 
 .surveyBtn {
   appearance: none;
@@ -63,9 +61,3 @@ a {
   text-decoration: none;
 }
 
-* {
-  box-sizing: border-box;
-  border: 0;
-  padding: 0;
-  margin: 0;
-}

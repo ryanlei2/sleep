@@ -4,33 +4,32 @@
   width: 100%;
 }
 
-.homeTitle {
-  margin-bottom: 100px;
-  text-align: center;
+.bannerBody {
+  position: relative;
+  font-size: 30px;
+  text-align: center; 
 }
 
-.heroImg{
-  padding-top: 30px;
-}
 .heroBanner {
-  position: absolute;
   z-index: -1;
+  position: absolute;
+  width: auto;
+  height: 400px;
+  top: 1%;
 }
 
 .bannerTitle {
-  font-size: 5vw;
-  font-size: 6vmin;
+  font-size: 30px;
 }
 .bannerSubtext {
-  font-size: 1.5vw;
-  font-size: 2vmin;
+  font-size: 10px;
 }
 
 .homeBodyTitle {
-  margin-top: 200px;
+  margin-top: 30px;
   text-align: center;
   font-weight: 300;
-  font-size: 3vw;
+  font-size: 3vmax;
 }
 
 .buttonsContainer {
@@ -40,10 +39,10 @@
 
 .button {
   width: 20vw;
-  max-width: 300px;
-  max-height: 300px;
-  height: 20vw;
-  font-size: max(3vw, 3vh);
+  min-width: 200px;
+  min-height: 200px;
+  height: 60px;
+  font-size: max(2.5vw, 2.5vh);
   margin-right: 3rem;
   background-color: #8AB6D6;
   color: rgb(64, 64, 64);
@@ -51,10 +50,10 @@
 
 .button2 {
   width: 20vw;
-  max-width: 300px;
-  max-height: 300px;
-  height: 20vw;
-  font-size: max(3vw, 3vh);
+  min-width: 200px;
+  min-height: 200px;
+  height: 60px;
+  font-size: max(2.5vw, 2.5vh);
   background-color: #2978B5;
   color: rgb(0, 0, 0);
 }
@@ -62,3 +61,17 @@
 .getStartedBtn {
   margin-top: 0;
 }
+
+.bannerButton {
+}
+
+@media screen and (max-width: 1040) {
+  .bannerBody {
+
+  }
+}
+/* @media screen and (max-width: 1146px) {
+  .bannerBody {
+    margin-top: 20vw;
+  }
+} */
