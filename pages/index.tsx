@@ -30,7 +30,7 @@ const Home: NextPage = () => {
               <h1 style={{ fontSize: "0.7em" }}>
                 <b style={{ fontSize: "5.5em" }}>Let&apos;s Plan Together</b>
                 <p style={{ fontSize: "3.5em" }}>We&apos;re on a mission to help every student choose the right path.</p>
-                <Link href={"/signup"}
+                <Link href={"/survey"}
                 legacyBehavior>
                   <a style={{ fontSize: "3em" }}
                     onClick={() => {
