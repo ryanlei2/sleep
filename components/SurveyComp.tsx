@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { StylesManager, Survey } from 'survey-react';
 import "survey-core/defaultV2.css";
 import firebase from "firebase/app"
 import "firebase/database"
 
-StylesManager.applyTheme("defaultV2");
 const surveyJSON = {
   //copy paste survey from surveyJS creator
     "title": "Career Survey",
@@ -102,6 +101,11 @@ const surveyJSON = {
 
 function SurveyComp() {
   const [results, setResults] = useState(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      StylesManager.applyTheme("defaultV2");
+    }
+  }, []);
 
   const handleComplete = (survey: { data: React.SetStateAction<null>; }) => {
     console.log(survey.data);

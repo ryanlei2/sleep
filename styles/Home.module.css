@@ -2,8 +2,8 @@
 .button {
   width: 20vw;
   min-width: 200px;
-  min-height: 200px;
-  height: 400px;
+  min-height: 100px;
+  height: 20vh;
   font-size: max(2.2vw, 2.2vh);
   margin-right: 3rem;
   background-color: #8AB6D6;
@@ -12,8 +12,8 @@
 .button2 {
   width: 20vw;
   min-width: 200px;
-  min-height: 200px;
-  height: 400px;
+  min-height: 100px;
+  height: 20vh;
   font-size: max(2.2vw, 2.2vh);
   background-color: #2978B5;
   color: rgb(0, 0, 0);

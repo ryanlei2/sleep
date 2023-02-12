@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   }
   return (
     <div className='text-center'>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "900px", width:'100vw', marginBottom:'20em' }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px", width:'100vw', marginBottom:'20em' }}>
         <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "200%" }}>
           <div style={{ position: "relative", height: "100%", width: "100vw" }}>
             <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit:'cover'}} />
