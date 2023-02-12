@@ -22,18 +22,17 @@ const Home: NextPage = () => {
   }
   return (
     <div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", width:'100vw' }}>
-        <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", width: "100vw" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", width:'100vw', marginBottom:'200px' }}>
+        <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
           <div style={{ position: "relative", height: "100%", width: "100vw" }}>
-            <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit: "cover",  }} />
+            <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", zIndex:'-1' }} />
             <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <h1 style={{ fontSize: "2em" }}>
-                <b style={{ marginTop:'30px', fontSize: "7vw" }}>Let&apos;s Plan Together</b>
-                <br></br>
-                <p style={{ fontSize: "2vw" }}>We&apos;re on a mission to help every student choose the right path.</p>
+                <b style={{ fontSize: "7vmin" }}>Let&apos;s Plan Together</b>
+                <p style={{ fontSize: "2vmin" }}>We&apos;re on a mission to help every student choose the right path.</p>
                 <Link href={"/signup"}
                 legacyBehavior>
-                  <a style={{ fontSize: "30px", marginTop:'0'}}
+                  <a style={{ fontSize: "30px" }}
                     onClick={() => {
                       {user ? (
                         router.push('/survey')
@@ -51,15 +50,15 @@ const Home: NextPage = () => {
       </div>
       <div
       style={{
-        width: '40%',
+        width: '100%',
         margin: 'auto',
       }}> 
         <h2 className="display-1 text-center my-3 ">Unsure about your class selection?</h2>
-      </div>
         <div className={styles.buttonsContainer}>
-          <Button className={styles.button}>Course Catalog</Button>
+          <Button style={{display: "flex", alignItems: "center", justifyContent: "center"}}className={styles.button}>Course Catalog</Button>
           <Button className={styles.button2}>FAQ</Button>
         </div>
+      </div>
     </div>
       
   );
