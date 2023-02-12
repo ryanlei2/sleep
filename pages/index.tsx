@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   }
   return (
     <div className='text-center'>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px", width:'100vw', marginBottom:'20em' }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px", width:'100vw', marginBottom:'29em' }}>
         <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "200%" }}>
           <div style={{ position: "relative", height: "100%", width: "100vw" }}>
             <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit:'cover'}} />
@@ -53,7 +53,11 @@ const Home: NextPage = () => {
         width: '100%',
         margin: 'auto',
       }}> 
-        <h2 className="display-1 text-center my-3 ">Unsure about your class selection?</h2>
+        <h2 className="display-1 text-center"
+        style={{
+          marginBottom:'90px'
+        }}
+        >Unsure about your class selection?</h2>
         <div className={styles.buttonsContainer}>
           <Button className={styles.button}>Course Catalog</Button>
           <Button className={styles.button2}>FAQ</Button>
