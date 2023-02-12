@@ -17,3 +17,4 @@ share this online with cloudflared tunnel --url http://localhost:3000 (for me on
 // ALSO create admin role with elevated privileges to input classes
 // implemenation idea: check if user has a certain ID token, if so, give access to them by their token
 
+//make the buttons on index cards with reactbootstrap
