@@ -1,20 +1,20 @@
+
 .button {
-  /* width: 20vw;
+  width: 20vw;
   min-width: 200px;
   min-height: 200px;
   height: 60px;
   font-size: max(2.5vw, 2.5vh);
-  margin-right: 3rem; */
+  margin-right: 3rem;
   background-color: #8AB6D6;
   color: rgb(64, 64, 64);
 }
-
 .button2 {
-  /* width: 20vw;
+  width: 20vw;
   min-width: 200px;
   min-height: 200px;
   height: 60px;
-  font-size: max(2.5vw, 2.5vh); */
+  font-size: max(2.5vw, 2.5vh);
   background-color: #2978B5;
   color: rgb(0, 0, 0);
 }
@@ -23,11 +23,15 @@
   margin-top: 0;
 }
 
-.bannerButton {
+.buttonsContainer {
+
 }
 
 @media screen and (max-width: 1040) {
   .bannerBody {
 
   }
+}
+@media only screen and (min-width: 1663px) {
+  
 }

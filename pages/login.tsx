@@ -29,6 +29,7 @@ const Login = () => {
       style={{
         width: '40%',
         margin: 'auto',
+        fontSize: '90px',
       }}
     >
       <h1 className="text-center my-3 ">Login</h1>

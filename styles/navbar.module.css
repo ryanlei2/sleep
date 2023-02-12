@@ -1,8 +1,8 @@
 .navBar {
-    z-index: 3;
+    z-index: 1;
     background-color: #f1f1f1;
 }
-@media screen and (min-width: 380px) {
+@media screen and (min-width: 3px) {
     
 }
 

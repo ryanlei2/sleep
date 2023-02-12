@@ -13,21 +13,20 @@ const NavbarComp = () => {
 
   return (
 
-      <Navbar expand="sm" className={styles.navBar} sticky='top'> 
+      <Navbar expand="xl" sticky='top' className={styles.navBar}>
         <Link href="/"  passHref legacyBehavior>
-          <Nav.Link className='ms-5 me-5' 
+          <Nav.Link className='ms-5 me-5'
           // style={{
           //   marginLeft:'50px',
           //   // marginRight:'70px',
           // }}
           > 
-          <div >
             <Image 
-              width="90" height="90"
+            className='my-5'
+              width="100" height="100"
               src={favicon}
               alt='logo'
             />
-          </div>
           </Nav.Link>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -35,7 +34,7 @@ const NavbarComp = () => {
           <Nav
           >
             {user ? (
-              <Nav.Item className="ms-auto display-6">
+              <Nav.Item className="ms-auto display-5">
                 <Nav.Link className='me-5'
                   onClick={() => {
                     router.push('/dashboard')
@@ -57,7 +56,7 @@ const NavbarComp = () => {
               </>//if not logged in show btn
             ) : (
               <>
-                <Nav.Item className='display-4 ms-auto'>
+                <Nav.Item className='display-5 ms-auto'>
                   <Nav.Link href='/about' className='ms-5' aria-current="page">
                     about
                   </Nav.Link>
@@ -71,7 +70,7 @@ const NavbarComp = () => {
               </>//if not logged in show btn
             ) : (
               <>
-                <Nav.Item className='display-4 ms-auto'>
+                <Nav.Item className='display-5 ms-auto'>
                   <Nav.Link href='/faq' className='me-5' aria-current="page"
                   >
                     FAQ
@@ -82,7 +81,7 @@ const NavbarComp = () => {
         </Nav>
         <Nav className='container-fluid'>
           {user ? (
-            <Nav.Item className="ms-auto display-6">
+            <Nav.Item className="ms-auto display-5">
               <Nav.Link className='ms-5'
                 onClick={() => {
                   logout()
@@ -94,7 +93,7 @@ const NavbarComp = () => {
             </Nav.Item>
           ) : (
             <>
-              <Nav.Item className='ms-auto display-4'>
+              <Nav.Item className='ms-auto display-5'>
                 <Nav.Link href='/login' className='ms-5 me-5' aria-current="page"
                 // style={{
                 //   marginRight:'50px',

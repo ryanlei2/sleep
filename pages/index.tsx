@@ -21,18 +21,18 @@ const Home: NextPage = () => {
     console.error(error);
   }
   return (
-    <div>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "500px", width:'100vw', marginBottom:'200px' }}>
-        <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%" }}>
+    <div className='text-center'>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "900px", width:'100vw', marginBottom:'20em' }}>
+        <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "200%" }}>
           <div style={{ position: "relative", height: "100%", width: "100vw" }}>
-            <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", zIndex:'-1' }} />
-            <div style={{ position: "absolute", top: 0, left: 0, height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <h1 style={{ fontSize: "2em" }}>
-                <b style={{ fontSize: "7vmin" }}>Let&apos;s Plan Together</b>
-                <p style={{ fontSize: "2vmin" }}>We&apos;re on a mission to help every student choose the right path.</p>
+            <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit:'cover'}} />
+            <div style={{ position: "absolute", top: 70, left: 0, height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <h1 style={{ fontSize: "0.7em" }}>
+                <b style={{ fontSize: "5.5em" }}>Let&apos;s Plan Together</b>
+                <p style={{ fontSize: "3.5em" }}>We&apos;re on a mission to help every student choose the right path.</p>
                 <Link href={"/signup"}
                 legacyBehavior>
-                  <a style={{ fontSize: "30px" }}
+                  <a style={{ fontSize: "3em" }}
                     onClick={() => {
                       {user ? (
                         router.push('/survey')
@@ -55,7 +55,7 @@ const Home: NextPage = () => {
       }}> 
         <h2 className="display-1 text-center my-3 ">Unsure about your class selection?</h2>
         <div className={styles.buttonsContainer}>
-          <Button style={{display: "flex", alignItems: "center", justifyContent: "center"}}className={styles.button}>Course Catalog</Button>
+          <Button className={styles.button}>Course Catalog</Button>
           <Button className={styles.button2}>FAQ</Button>
         </div>
       </div>
