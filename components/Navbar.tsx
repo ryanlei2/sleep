@@ -22,7 +22,7 @@ const NavbarComp = () => {
           // }}
           > 
             <Image 
-            className='my-5'
+            className='my-5 me-5'
               width="100" height="100"
               src={favicon}
               alt='logo'
