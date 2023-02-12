@@ -9,12 +9,6 @@ import { useRouter } from 'next/router'
 
 
 const Home: NextPage = () => {
-  function handleClick() {
-    console.log('increment like count');
-  }
-  const { user, logout } = useAuth()
-  const router = useRouter()
-
   return (
     <div>
       
@@ -45,7 +39,7 @@ const Home: NextPage = () => {
                   }} 
               >Get Started</a>
               {/* 
-              
+                test
               */}
             </Link>
       </div>
