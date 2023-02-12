@@ -1,8 +1,6 @@
-import router from 'next/router'
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useAuth } from '../context/AuthContext'
-
 
 const Signup = () => {
   const { user, signup } = useAuth()
@@ -17,11 +15,8 @@ const Signup = () => {
 
     try {
       await signup(data.email, data.password)
-      router.push('/dashboard')
     } catch (err) {
       console.log(err)
-      //here set something like email alreayd in use with if statement
-
     }
 
     console.log(data)
@@ -32,9 +27,10 @@ const Signup = () => {
       style={{
         width: '40%',
         margin: 'auto',
+        fontSize: '2vmax'
       }}
     >
-      <h1 className="text-center my-3 ">Signup</h1>
+      <h1 className="text-center my-3 display-3">Signup</h1>
       <Form onSubmit={handleSignup}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
@@ -71,7 +67,6 @@ const Signup = () => {
         <Button variant="primary" type="submit">
           Signup
         </Button>
-        <p></p>
       </Form>
     </div>
   )

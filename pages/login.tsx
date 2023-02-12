@@ -29,10 +29,10 @@ const Login = () => {
       style={{
         width: '40%',
         margin: 'auto',
-        fontSize: '90px',
+        fontSize: '2vmax'
       }}
     >
-      <h1 className="text-center my-3 ">Login</h1>
+      <h1 className="text-center my-3 display-3 ">Login</h1>
       <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
