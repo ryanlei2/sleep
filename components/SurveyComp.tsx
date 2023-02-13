@@ -114,14 +114,14 @@ function SurveyComp() {
     console.log(survey.data);
     setResults(survey.data);
 
-    survey.onComplete.add(function(result: { data: any; }) {
-      firebase.database().ref("surveyResults").push(result.data).then(() => {
-        console.log("Data saved successfully");
-      })
-      .catch((error: any) => {
-        console.error("Error saving data: ", error);
-      });;
-    });
+    // survey.onComplete.add(function(result: { data: any; }) {
+    //   firebase.database().ref("surveyResults").push(result.data).then(() => {
+    //     console.log("Data saved successfully");
+    //   })
+    //   .catch((error: any) => {
+    //     console.error("Error saving data: ", error);
+    //   });;
+    // });
   };
 
   return <Survey json={surveyJSON} onComplete={handleComplete} />;

@@ -17,7 +17,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 // Get a reference to the Realtime Database
-const db = getDatabase(app)// Create a new collection named "courses"
+const userSelection = getDatabase(app)
+// Create a new collection named "userSelection"
+export const userSelectionRef = ref(userSelection, "courses")
+
+// Get a reference to the Realtime Database
+const db = getDatabase(app)
+// Create a new collection named "courses"
 export const coursesRef = ref(db, "courses")
 
 export const auth = getAuth()
