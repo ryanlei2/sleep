@@ -59,8 +59,12 @@ const Home: NextPage = () => {
         }}
         >Unsure about your class selection?</h2>
         <div className={styles.buttonsContainer}>
-          <Button className={styles.button}>Course Catalog</Button>
-          <Button className={styles.button2}>FAQ</Button>
+          <Link href={'/catalog'}>
+            <Button className={styles.button}>Course Catalog</Button>
+          </Link>
+          <Link href={'/faq'}>
+            <Button className={styles.button2} style={{alignItems: "center"}}>FAQ</Button>
+          </Link>
         </div>
       </div>
     </div>

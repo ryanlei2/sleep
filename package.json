@@ -13,7 +13,7 @@
     "@popperjs/core": "^2.11.6",
     "ace-builds": "^1.15.0",
     "bootstrap": "^5.2.3",
-    "firebase": "^9.15.0",
+    "firebase": "^9.17.1",
     "firebaseui": "^6.0.2",
     "next": "^13.1.6",
     "next-js": "^0.9.0-alpha",

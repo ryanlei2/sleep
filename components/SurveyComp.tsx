@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { StylesManager, Survey } from 'survey-react';
 import "survey-core/defaultV2.css";
-import firebase from "firebase/app"
-import "firebase/database"
+import * as firebase from "firebase/app";
+import "firebase/database";
 
 const surveyJSON = {
   //copy paste survey from surveyJS creator
@@ -107,11 +107,20 @@ function SurveyComp() {
     }
   }, []);
 
-  const handleComplete = (survey: { data: React.SetStateAction<null>; }) => {
+  const handleComplete = (survey: {
+    onComplete: any; data: React.SetStateAction<null>; 
+}) => {
     console.log(survey.data);
     setResults(survey.data);
-    //give rsults to firebase
-    
+
+    survey.onComplete.add(function(result: { data: any; }) {
+      (firebase as any).database().ref("surveyResults").push(result.data).then(() => {
+        console.log("Data saved successfully");
+      })
+      .catch((error: any) => {
+        console.error("Error saving data: ", error);
+      });;
+    });
   };
 
   return <Survey json={surveyJSON} onComplete={handleComplete} />;
