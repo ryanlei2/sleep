@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
-import {getFirestore} from "firebase/firestore";
-import firebase from "firebase/app";
+import * as firebase from "firebase/app";
+
+import { getDatabase, ref } from 'firebase/database'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCiepxy3bi0erjTOH-Ml-i5Kx4G63h-Wcs",
@@ -14,4 +15,9 @@ const firebaseConfig = {
 
 
 const app = initializeApp(firebaseConfig);
+
+// Get a reference to the Realtime Database
+const db = getDatabase(app)// Create a new collection named "courses"
+export const coursesRef = ref(db, "courses")
+
 export const auth = getAuth()
