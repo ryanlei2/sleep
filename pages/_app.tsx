@@ -5,10 +5,18 @@ import Navbar from '../components/Navbar'
 import { AuthContextProvider } from '../context/AuthContext'
 import { useRouter } from 'next/router'
 import ProtectedRoute from '../components/ProtectedRoute'
+import { useEffect } from 'react'
 
 const noAuthRequired = ['/', '/about', '/login', '/signup', '/faq'] //THIS IS WHERE YOU WHITELIST PAGES
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+            const loader = document.getElementById('globalLoader');
+        if (loader)
+            loader.style.display = 'none';
+    }
+}, []);
 
   return (
     <AuthContextProvider>
