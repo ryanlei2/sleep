@@ -4,6 +4,7 @@ import { StylesManager, Survey } from 'survey-react';
 import "survey-core/defaultV2.css";
 import * as firebase from "firebase/app";
 import "firebase/database";
+import { Database } from 'firebase/database';
 
 const surveyJSON = {
   //copy paste survey from surveyJS creator
@@ -114,7 +115,7 @@ function SurveyComp() {
     setResults(survey.data);
 
     survey.onComplete.add(function(result: { data: any; }) {
-      (firebase as any).database().ref("surveyResults").push(result.data).then(() => {
+      firebase.database().ref("surveyResults").push(result.data).then(() => {
         console.log("Data saved successfully");
       })
       .catch((error: any) => {
