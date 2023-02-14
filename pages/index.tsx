@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   }
   return (
     <div className='text-center'>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px", width:'100vw', marginBottom:'29em' }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "300px", width:'100vw', marginBottom:'29em' }}>
         <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "200%" }}>
           <div style={{ position: "relative", height: "100%", width: "100vw" }}>
             <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit:'cover'}} />
@@ -52,6 +52,7 @@ const Home: NextPage = () => {
       style={{
         width: '100%',
         margin: 'auto',
+        paddingBottom: '150px'
       }}> 
         <h2 className="display-1 text-center"
         style={{
@@ -66,6 +67,26 @@ const Home: NextPage = () => {
             <Button className={styles.button2} style={{alignItems: "center"}}>FAQ</Button>
           </Link>
         </div>
+      </div>
+      <div>
+        <Container>
+          <hr
+          style={{
+            marginBottom:'120px'
+          }}
+          ></hr>
+          <h1 className='display-1'
+          style={{
+            marginBottom:'30px'
+          }}
+          >Why Coursee</h1>
+          <p className='display-6'
+          style={{
+            width:'700px',
+            margin: 'auto',
+          }}
+          >Coursee is a streamlined and free way of choosing your courses without any external guidance.</p>
+        </Container>
       </div>
     </div>
       

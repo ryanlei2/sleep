@@ -14,12 +14,12 @@ const firebaseConfig = {
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 // Get a reference to the Realtime Database
-const userSelection = getDatabase(app)
+export const userDatadb = getDatabase(app)
 // Create a new collection named "userSelection"
-export const userSelectionRef = ref(userSelection, "courses")
+export const userSelectionRef = ref(userDatadb, "userSelection")
 
 // Get a reference to the Realtime Database
 const db = getDatabase(app)
@@ -27,3 +27,7 @@ const db = getDatabase(app)
 export const coursesRef = ref(db, "courses")
 
 export const auth = getAuth()
+
+export function database() {
+  throw new Error('Function not implemented.');
+}
