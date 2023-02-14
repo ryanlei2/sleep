@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap'
 import { StylesManager, Survey } from 'survey-react';
 import "survey-core/defaultV2.css";
 import 'firebase/database';
-import { SurveyModel } from 'survey-core';
 import * as firebase from 'firebase/app';
 import { userDatadb, userSelectionRef } from '../config/firebase';
 import { push, ref, set } from 'firebase/database';
@@ -111,7 +110,10 @@ function SurveyComp() {
     }
   }, []);
   const [results, setResults] = useState(null);
+
+
   const handleSurveyComplete = (survey: {
+    //checks if survey is complete
     onComplete: any; 
     //data: React.SetStateAction<null>; 
     data: Record<string, any>;
@@ -123,8 +125,18 @@ function SurveyComp() {
       answer: value
     }));
     console.log(dataArray);
+    analyzeSurveyData(dataArray)
   };
 
+  //look at data and select courses
+  function analyzeSurveyData(data: any[]) {
+    data.forEach((value, index) => {
+      console.log(`Answer ${index + 1}: ${value.answer} (to question: ${value.question})`);
+    });
+  }
+  
+
+  
   return (
     <Container>
       {results ? (
@@ -138,6 +150,7 @@ function SurveyComp() {
     </Container>
   );
 }
+
 
 //gg
 export default SurveyComp;
