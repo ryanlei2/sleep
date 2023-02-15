@@ -12,6 +12,8 @@ class MyDocument extends Document {
                         {loader}
                     </style>
                 </head>
+                {/* body */}
+
                 <body>
                 <div id={'globalLoader'}>
                      <div className="loader">
@@ -22,6 +24,8 @@ class MyDocument extends Document {
                 <Main/>
                 <NextScript/>
                 </body>
+                
+                {/* body */}
             </Html>
         )
     }

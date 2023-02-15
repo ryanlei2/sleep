@@ -1,8 +1,8 @@
-import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
-import * as firebase from "firebase/app";
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc, serverTimestamp, CollectionReference } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getDatabase, ref } from 'firebase/database';
 
-import { getDatabase, ref } from 'firebase/database'
 
 const firebaseConfig = {
   apiKey: "AIzaSyCiepxy3bi0erjTOH-Ml-i5Kx4G63h-Wcs",
@@ -14,20 +14,37 @@ const firebaseConfig = {
 };
 
 
-const app = firebase.initializeApp(firebaseConfig);
+// initialize Firebase app
+const app = initializeApp(firebaseConfig);
 
-// Get a reference to the Realtime Database
-export const userDatadb = getDatabase(app)
-// Create a new collection named "userSelection"
-export const userSelectionRef = ref(userDatadb, "userSelection")
+// Firestore
+const db = getFirestore(app);
+export const userSelectionRef = collection(db, "userSelection");
 
-// Get a reference to the Realtime Database
-const db = getDatabase(app)
-// Create a new collection named "courses"
-export const coursesRef = ref(db, "courses")
+// Realtime Database
+const rtdb = getDatabase(app);
+export const coursesRef = ref(rtdb, "courses");
 
-export const auth = getAuth()
+// Auth
+export const auth = getAuth();
 
-export function database() {
-  throw new Error('Function not implemented.');
+export function saveSurveyData(surveyData: { question: string; answer: any; }[]) {
+  //take user id
+  const userId = auth.currentUser?.uid;
+  if (!userId) {
+    console.error('User is not logged in.');
+    return;
+  }
+  //add document to the userSelectionRef firestore db with time added and data, which is survey res
+  addDoc(userSelectionRef, {
+    userId: userId,
+    timestamp: serverTimestamp(),
+    data: surveyData,
+  })
+    .then(() => {
+      console.log("Survey data saved successfully to Cloud Firestore!");
+    })
+    .catch((error) => {
+      console.error("Error saving survey data: ", error);
+    });
 }
