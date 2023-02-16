@@ -84,8 +84,18 @@ const Home: NextPage = () => {
           style={{
             width:'700px',
             margin: 'auto',
+            marginBottom: '30px'
           }}
           >Coursee is a streamlined and free way of choosing your courses without any external guidance.</p>
+          <div
+          style={{
+            marginBottom: '100px'
+          }}>
+            <Link className='display-4' href={'/about'}
+          >About</Link>
+          </div>
+          
+          
         </Container>
       </div>
     </div>
