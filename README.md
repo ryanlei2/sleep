@@ -16,13 +16,14 @@ or
 ## TODO
 EXTRA FEATURES
 
-[X] check if email is already registered, if so, notify at signup, maybe also if login is bad, once user has completed survey, take away option from dash
+- [ ] check if email is already registered, if so, notify at signup, maybe also if login is bad, once user has completed survey, take away option from dash
 
-[X] ALSO create admin role with elevated privileges to input classes
-[X] implemenation idea: check if user has a certain ID token, if so, give access to them by their token
+- [ ] create admin role with elevated privileges to input classes
+- [ ] implemenation idea: check if user has a certain ID token, if so, give access to them by their token
 
-[X] make the buttons on index cards with reactbootstrap
+- [ ] make the buttons on index cards with reactbootstrap
 
 
-IMPORTANT
-[X] add career options
+### IMPORTANT
+
+- [ ] add career options
