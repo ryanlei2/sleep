@@ -13,10 +13,17 @@ share this online with ```cloudflared tunnel --url http://localhost:3000``` (for
 or
 ```./ngrok http http://localhost:3000```
 
- TODO
-//check if email is already registered, if so, notify at signup, maybe also if login is bad, once user has completed survey, take away option from dash
+## TODO
+EXTRA FEATURES
 
-// ALSO create admin role with elevated privileges to input classes
-// implemenation idea: check if user has a certain ID token, if so, give access to them by their token
+- [ ] check if email is already registered, if so, notify at signup, maybe also if login is bad, once user has completed survey, take away option from dash
 
-//make the buttons on index cards with reactbootstrap
+- [ ] create admin role with elevated privileges to input classes
+- [ ] implemenation idea: check if user has a certain ID token, if so, give access to them by their token
+
+- [ ] make the buttons on index cards with reactbootstrap
+
+
+### IMPORTANT
+
+- [ ] add career options
