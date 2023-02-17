@@ -62,7 +62,7 @@ const Home: NextPage = () => {
         <Row style={{
           justifyContent:'center'
         }}>
-          <Card style={{ width: '30rem' }}>
+          <Card border="success" style={{ width: '30rem' }}>
             <Card.Img variant="top" src="#" />
             <Card.Body>
               <Card.Title className='display-6'
@@ -80,7 +80,7 @@ const Home: NextPage = () => {
                 </Link>
             </Card.Body>
           </Card>
-          <Card style={{ width: '30rem', marginLeft:'30px' }}>
+          <Card border="success" style={{ width: '30rem', marginLeft:'30px' }}>
             <Card.Img variant="top" src="holder.js/100px180" />
             <Card.Body>
               <Card.Title className='display-6'
@@ -112,14 +112,20 @@ const Home: NextPage = () => {
             marginBottom:'30px'
           }}
           >Why Coursee</h1>
-          <div
-          style={{
-            marginBottom: '100px'
-          }}>
+          <div>
             Coursee is a streamlined and free way of choosing your courses without any external guidance.
-            <br></br>
-            <Link className='display-4 my-4' href={'/about'}
-          >About</Link>
+            <br 
+            style={{
+              marginBottom: '70px'
+            }}
+            ></br>
+            <div
+            style={{
+              marginBottom: '70px'
+            }}
+            >
+              <Link className='display-4 my-4' href={'/about'} >About</Link>
+            </div>
           </div>
         </Container>
       </div>
