@@ -6,17 +6,16 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head/>
-                <head>
+                <Head>
                     <style>
                         {loader}
                     </style>
-                </head>
+                </Head>
                 {/* body */}
 
                 <body>
                 <div id={'globalLoader'}>
-                     <div className="loader">
+                    <div className="loader">
                         <div/>
                         <div/>
                     </div>

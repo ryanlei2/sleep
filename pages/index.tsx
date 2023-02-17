@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { Button, Card, Container, Row, Col} from 'react-bootstrap'
+import { Button, Card, Container, Row, Col, ButtonGroup } from 'react-bootstrap'
 import styles from '../styles/home.module.css'
 import banner from '../assets/banner.png'
 import Link from 'next/link'
@@ -59,17 +59,49 @@ const Home: NextPage = () => {
           marginBottom:'90px'
         }}
         >Unsure about your class selection?</h2>
-        <div className={styles.buttonsContainer}>
-          <Link href={'/catalog'}>
-            <Button className={styles.button}>Course Catalog</Button>
-          </Link>
-          <Link href={'/faq'}>
-            <Button className={styles.button2} style={{alignItems: "center"}}>FAQ</Button>
-          </Link>
-        </div>
+        <Row style={{
+          justifyContent:'center'
+        }}>
+          <Card style={{ width: '30rem' }}>
+            <Card.Img variant="top" src="#" />
+            <Card.Body>
+              <Card.Title className='display-6'
+              style={{
+                fontWeight:'bold'
+              }}
+              >FAQ</Card.Title>
+              <Card.Text style={{
+                fontSize:'1.7rem'
+              }}>
+                Have a question you need answered?
+              </Card.Text>
+                <Link href="/faq">
+                  <Button variant="primary">Click Here</Button>
+                </Link>
+            </Card.Body>
+          </Card>
+          <Card style={{ width: '30rem', marginLeft:'30px' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title className='display-6'
+              style={{
+                fontWeight:'bold'
+              }}
+              >Catalog</Card.Title>
+              <Card.Text style={{
+                fontSize:'1.7rem'
+              }}>
+                Take a look at our course catalog!
+              </Card.Text>
+              <Link href="/catalog">
+                  <Button variant="primary">Click Here</Button>
+                </Link>
+            </Card.Body>
+          </Card>
+        </Row>
       </div>
       <div>
-        <Container>
+        <Container className='display-5'>
           <hr
           style={{
             marginBottom:'120px'
@@ -80,22 +112,15 @@ const Home: NextPage = () => {
             marginBottom:'30px'
           }}
           >Why Coursee</h1>
-          <p className='display-6'
-          style={{
-            width:'700px',
-            margin: 'auto',
-            marginBottom: '30px'
-          }}
-          >Coursee is a streamlined and free way of choosing your courses without any external guidance.</p>
           <div
           style={{
             marginBottom: '100px'
           }}>
-            <Link className='display-4' href={'/about'}
+            Coursee is a streamlined and free way of choosing your courses without any external guidance.
+            <br></br>
+            <Link className='display-4 my-4' href={'/about'}
           >About</Link>
           </div>
-          
-          
         </Container>
       </div>
     </div>
