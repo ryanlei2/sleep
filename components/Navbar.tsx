@@ -15,12 +15,7 @@ const NavbarComp = () => {
 
       <Navbar expand="xl" sticky='top' className={styles.navBar}>
         <Link href="/"  passHref legacyBehavior>
-          <Nav.Link className='ms-5 me-5'
-          // style={{
-          //   marginLeft:'50px',
-          //   // marginRight:'70px',
-          // }}
-          > 
+          <Nav.Link className=''>
             <Image 
             className='me-5'
               width="80" height="80"
@@ -35,7 +30,7 @@ const NavbarComp = () => {
           >
             {user ? (
               <Nav.Item className="ms-auto display-5">
-                <Nav.Link className='me-5'
+                <Nav.Link className='' 
                   onClick={() => {
                     router.push('/dashboard')
                   }}
@@ -48,8 +43,6 @@ const NavbarComp = () => {
               </>
             )}
           </Nav>
-          {/* dont use emsp make this css (you know how) */}
-
         <Nav className='container-fluid'>
             {user ? (
               <>
@@ -57,7 +50,7 @@ const NavbarComp = () => {
             ) : (
               <>
                 <Nav.Item className='display-5 ms-auto'>
-                  <Nav.Link href='/about' className='ms-5' aria-current="page">
+                  <Nav.Link href='/about' className='' aria-current="page">
                     about
                   </Nav.Link>
                 </Nav.Item>
@@ -71,7 +64,7 @@ const NavbarComp = () => {
             ) : (
               <>
                 <Nav.Item className='display-5 ms-auto'>
-                  <Nav.Link href='/faq' className='me-5' aria-current="page"
+                  <Nav.Link href='/faq' className='' aria-current="page"
                   >
                     FAQ
                   </Nav.Link>
@@ -82,7 +75,7 @@ const NavbarComp = () => {
         <Nav className='container-fluid'>
           {user ? (
             <Nav.Item className="ms-auto display-5">
-              <Nav.Link className='ms-5'
+              <Nav.Link className=''
                 onClick={() => {
                   logout()
                   router.push('/login')
@@ -94,12 +87,7 @@ const NavbarComp = () => {
           ) : (
             <>
               <Nav.Item className='ms-auto display-5'>
-                <Nav.Link href='/login' className='ms-5 me-5' aria-current="page"
-                // style={{
-                //   marginRight:'50px',
-                //   // marginLeft:'70px',
-                // }}
-                >
+                <Nav.Link href='/login' className='' aria-current="page">
                   login
                 </Nav.Link>
               </Nav.Item>
@@ -108,7 +96,6 @@ const NavbarComp = () => {
         </Nav> 
           </Navbar.Collapse>
     </Navbar>
-    // </div>
   );
 }
 
