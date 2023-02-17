@@ -285,7 +285,6 @@ function SurveyComp() {
   const handleSurveyComplete = (survey: {
     //checks if survey is complete
     onComplete: any; 
-    //data: React.SetStateAction<null>; 
     data: Record<string, any>;
   }) => {
     console.log(survey.data)
@@ -313,6 +312,7 @@ function SurveyComp() {
       }
 //TODO: add fields for 3 best options in STEM (4x)
 
+//check using the array above! methods for looking over already given
       //now check stuff man idk
         //logic: so first see if freshman,soph,junior,sen, just to see what classes someone of their caliber should take, eg you wouldnt have a freshman be assigned calc bc even if difficulty is hard, would prolly be some honors class, we should already have set list based on difficulty
         //now ask whether they have their core credits... why would we assign an english class if they have all eng credits?
@@ -326,8 +326,38 @@ function SurveyComp() {
 
           //though they choose three we stil give em same stuff (illusion of free choice)
           //deleted all that i dont need,. check first collection in firebase realtimedb, id0
+
+          //do a list instead of array to delete items faster rather than search for it
+          //list(5) => math, science, history, LA, language
+          //freshmen
+            /*
+              hard-core - list(0)=algebra 2 honors,list(1)=intro to chem,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              med-core - list(0)=algebra 2,list(1)=intro to chem,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              ez-core - list(0)=algebra 2,list(1)=intro to chem,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              healthpe - musthave
+            */
+           //soph
+            /*
+              hard-core - list(0)=precalc honors,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              med-core - list(0)=precalc,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              ez-core - list(0)=,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              healthpe - should have
+            */
+           //junior
+            /*
+              hard-core - list(0)=calc BC,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              med-core - list(0)=calc AB,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              ez-core - list(0)=calc 1,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              healthpe - if not then do
+            */
+           //senior
+            /*
+              hard-core - list(0)=AP stats,list(1)=no science,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              med-core - list(0)=,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              ez-core - list(0)=,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
+              healthpe - if not then do
+            */
     });
-    
   }
   return (
     <Container>
@@ -342,7 +372,5 @@ function SurveyComp() {
     </Container>
   );
 }
-
-
 //gg
 export default SurveyComp;

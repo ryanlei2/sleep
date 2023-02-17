@@ -3,6 +3,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import 'firebaseui/dist/firebaseui.css';
 import {auth} from "firebaseui";
 
+//basically this is an updated firebaseUI because old is deprecated
 interface Props {
     // The Firebase UI Web UI Config object.
     // See: https://github.com/firebase/firebaseui-web#configuration
