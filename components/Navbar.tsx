@@ -13,11 +13,15 @@ const NavbarComp = () => {
 
   return (
 
-      <Navbar expand="xl" sticky='top' className={styles.navBar}>
+      <Navbar expand="xl" sticky='top' className={styles.navBar}
+      style={{
+        height:'100px'
+      }}
+      >
         <Link href="/"  passHref legacyBehavior>
           <Nav.Link className=''>
             <Image 
-            className='me-5'
+            className='me-5 mx-3'
               width="80" height="80"
               src={favicon}
               alt='logo'

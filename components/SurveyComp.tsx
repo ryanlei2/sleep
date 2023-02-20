@@ -310,53 +310,25 @@ function SurveyComp() {
       } else {
         console.log(`${value.answer}`); //get answer as value.answer if singular value
       }
-//TODO: add fields for 3 best options in STEM (4x)
 
-//check using the array above! methods for looking over already given
-      //now check stuff man idk
-        //logic: so first see if freshman,soph,junior,sen, just to see what classes someone of their caliber should take, eg you wouldnt have a freshman be assigned calc bc even if difficulty is hard, would prolly be some honors class, we should already have set list based on difficulty
-        //now ask whether they have their core credits... why would we assign an english class if they have all eng credits?
-        //now check difficulty to see which classes to assign to results (basic core credit classes)
-          //these must make up and total: an English, Math, Science, Social Studies credit, could be normal, honors, ap, based on difficulty
-          //note: i dont need to ask for prev classes as i assume they were of lower difficulty than the year they will be in, otherwise why even be on coursee if one knows what they choose?
-        
-          //finally remaining slots that arent core classes/required ones will be used for career classes that colleges like if they've 
+//DEFIENITELY ADD
+// admin dashboard to see students' responses, they should be able to indicate thumbs up or down based on a career we gave them (short description included) to see if our model can be fixed (store good or bad from survey)
 
-          //also iterate through the list, dont look for specific question because people like freshmen wont get certain questions
-
-          //though they choose three we stil give em same stuff (illusion of free choice)
-          //deleted all that i dont need,. check first collection in firebase realtimedb, id0
-
-          //do a list instead of array to delete items faster rather than search for it
-          //list(5) => math, science, history, LA, language
-          //freshmen
-            /*
-              hard-core - list(0)=algebra 2 honors,list(1)=intro to chem,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              med-core - list(0)=algebra 2,list(1)=intro to chem,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              ez-core - list(0)=algebra 2,list(1)=intro to chem,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              healthpe - musthave
-            */
-           //soph
-            /*
-              hard-core - list(0)=precalc honors,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              med-core - list(0)=precalc,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              ez-core - list(0)=,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              healthpe - should have
-            */
-           //junior
-            /*
-              hard-core - list(0)=calc BC,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              med-core - list(0)=calc AB,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              ez-core - list(0)=calc 1,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              healthpe - if not then do
-            */
-           //senior
-            /*
-              hard-core - list(0)=AP stats,list(1)=no science,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              med-core - list(0)=,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              ez-core - list(0)=,list(1)=,list(2)=,list(3)=,list(4)=,list(5)=,list(6)=
-              healthpe - if not then do
-            */
+// survey logic:
+// check grade, but dont use it to generate classes (instead use to keep track of when user filled out survey in prev years)
+// see if health and pe fulfilled, otherwise advise to take it
+// check stem career
+//   this is interest, keep track of this
+// check previous classes (ALL PREVIOUS YEARES NOT JUST ONE YEAR BEFORE): math-core, science-core, social-core, la-core, use this to gen next core classes
+// this shouldnt be hard because usually previous high school core classes are generic, eg algebra 1, or la9
+//   create table of easy-hard core classes from this data
+//   IMPORTANT: if AP class taken prev tear give go ahead to recommend ap core class next year, eg science apbio to ap chem--if this is too hard, just remember this will be in the intermediate section and the recommended or easy section will container easier classes
+// go into more depth on stem interest Q's (this is most important so focus on these) 
+//   should be simple enough that db can handle different responses: difficulty, type, etc
+//   IMPORTANT: in the db these should be ranked from best and slowly getting worse for each stem path to maximize advantage, ap classes top rank
+//   ask about how hard these should be (rigor)
+//       check if each response is not mentioned in core courses so we can take that one out possibly add more options
+//       doesnt matter if theres overlap between stem classes and previous year classes, there should be multiple so they can just not choose those
     });
   }
   return (

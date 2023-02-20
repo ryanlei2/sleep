@@ -9,6 +9,8 @@ export default function Survey() {
     <Container className="mx-auto">
       <SurveyComp />
       {/* link to results template to paste into survey complete in SurveyJS */}
+      {/* once complete add completed course creation list to dropdown menu with name, basically a history of courses per user id */}
+      {/* once selected current courses list, add some further identification/specification/help/information/clarification about each course to the dashbaord */}
     </Container>
   )
 }

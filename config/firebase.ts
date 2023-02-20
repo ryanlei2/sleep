@@ -17,11 +17,11 @@ const firebaseConfig = {
 // initialize Firebase app
 const app = initializeApp(firebaseConfig);
 
-// Firestore
+// Firestore reference from app
 const db = getFirestore(app);
 export const userSelectionRef = collection(db, "userSelection");
 
-// Realtime Database
+// Realtime Database reference from app
 const rtdb = getDatabase(app);
 export const coursesRef = ref(rtdb, "courses");
 

@@ -22,7 +22,7 @@ const Home: NextPage = () => {
   }
   return (
     <div className='text-center'>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "300px", width:'100vw', marginBottom:'29em' }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "400px", width:'100vw', marginBottom:'29em' }}>
         <Container fluid style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "200%" }}>
           <div style={{ position: "relative", height: "100%", width: "100vw" }}>
             <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit:'cover'}} />
@@ -100,34 +100,42 @@ const Home: NextPage = () => {
           </Card>
         </Row>
       </div>
-      <div>
-        <Container className='display-5'>
-          <hr
+      <div
+      style={{
+        backgroundColor:'#C9F0FF',
+        height:'300px'
+      }}
+      >
+          <Container className='display-5'
           style={{
-            marginBottom:'120px'
+            backgroundColor:'#caf0f8',
+            width:'2000px',
+            height:'300px'
           }}
-          ></hr>
-          <h1 className='display-1'
-          style={{
-            marginBottom:'30px'
-          }}
-          >Why Coursee</h1>
-          <div>
-            Coursee is a streamlined and free way of choosing your courses without any external guidance.
-            <br 
+          >
+            <hr></hr>
+            <h1 className='display-1'
             style={{
-              marginBottom: '70px'
+              marginTop:'20px',
+              marginBottom:'20px'
             }}
-            ></br>
+            >Why Coursee</h1>
             <div
             style={{
-              marginBottom: '70px'
+              marginBottom:'70px'
             }}
             >
-              <Link className='display-4 my-4' href={'/about'} >About</Link>
+              Coursee is a streamlined and free way of choosing your courses without any external guidance.
+              <br 
+              style={{
+                marginBottom: '30px'
+              }}
+              ></br>
+                <Link className='display-4' href={'/about'}>
+                  About
+                </Link>
             </div>
-          </div>
-        </Container>
+          </Container>
       </div>
     </div>
       

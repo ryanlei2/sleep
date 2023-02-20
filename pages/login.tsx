@@ -19,8 +19,14 @@ const Login = () => {
     try {
       await login(data.email, data.password)
       router.push('/dashboard')
-    } catch (err) {
-      console.log(err)
+    } catch (err :any) {
+      if (err.code === 'auth/user-not-found') {
+        window.alert('Email address not found')
+      } else if (err.code === 'auth/wrong-password') {
+        window.alert('Incorrect password')
+      } else {
+        console.log(err)
+      }
     }
   }
 
