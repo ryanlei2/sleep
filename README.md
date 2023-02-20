@@ -7,7 +7,7 @@ Because this dynamic website does not have a domain associated with it, just dow
 yarn add next
 yarn dev
 ```
-Built with React, React-bootstrap, firebase (and nodeJS documentation), SurveyJS, Typescript, HTML, CSS, NPM, Yarn, NextJS <3
+Built with React, React-bootstrap, firebase (Javascript9 syntax), SurveyJS, Typescript, HTML, CSS, NPM, Yarn, NextJS <3
 
 share this online with ```cloudflared tunnel --url http://localhost:3000``` (for me only lol)
 or
