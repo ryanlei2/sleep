@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, serverTimestamp, CollectionReference } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref } from 'firebase/database';
+import { Auth, sendPasswordResetEmail as firebaseSendPasswordResetEmail } from 'firebase/auth';
 
 
 const firebaseConfig = {
@@ -27,6 +28,16 @@ export const coursesRef = ref(rtdb, "courses");
 
 // Auth
 export const auth = getAuth();
+
+export const sendPasswordResetEmail = async (auth: Auth, email: string) => {
+  try {
+    await firebaseSendPasswordResetEmail(auth, email); // Modify the email value here
+    console.log('Password reset email sent successfully.')
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 export function saveSurveyData(surveyData: { question: string; answer: any; }[]) {
   //take user id

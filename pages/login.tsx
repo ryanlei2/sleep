@@ -77,6 +77,8 @@ const Login = () => {
       </Form>
       <hr></hr>
       <p>New to Coursee? <Link href='/signup'>Sign Up</Link></p>
+      <Button href='PasswordResetForm'>Forgot Password?</Button>
+
     </div>
   )
 }

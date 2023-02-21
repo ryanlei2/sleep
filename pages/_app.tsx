@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { useEffect } from 'react'
 
-const noAuthRequired = ['/', '/about', '/login', '/signup', '/faq', '/catalog'] //THIS IS WHERE YOU WHITELIST PAGES
+const noAuthRequired = ['/', '/about', '/login', '/signup', '/faq', '/catalog', '/PasswordResetForm'] //THIS IS WHERE YOU WHITELIST PAGES
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   useEffect(() => {
