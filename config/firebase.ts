@@ -31,6 +31,7 @@ export const auth = getAuth();
 
 //collections within the firebase realtime db... also need one for courses.. yea?
 export const adminsCollection = collection(db, 'admins');
+export const coursesCollection = collection(db, 'courses');
 
 // Function to check if a user is an admin
 export async function checkAdmin(userId: string) {

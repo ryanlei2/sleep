@@ -4,12 +4,8 @@ import { auth, sendPasswordResetEmail } from '../config/firebase';
 
 const PasswordResetForm = () => {
     const [email, setEmail] = useState('');
-
+//send it!
     const handlePasswordReset = async (email: string) => {
-        if (!email.match(/^\S+@\S+\.\S+$/)) {
-            console.error('Invalid email format');
-            return;
-        }
         console.log('Sending password reset email to:', email);
         try {
             await sendPasswordResetEmail(auth, email);
@@ -18,7 +14,7 @@ const PasswordResetForm = () => {
             console.log(error)
         }
         }
-
+    //what to do if button clicked
     const handleSendPasswordResetEmail = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         if (!email.match(/^\S+@\S+\.\S+$/)) {
