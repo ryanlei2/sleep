@@ -27,3 +27,5 @@ EXTRA FEATURES
 ### IMPORTANT
 
 - [ ] add career options
+- [ ] only update this after committing code on website, otherwise it screws up with branches
+- [ ] get rid of all console.logs after completed because of security purposes to not show user UID's
