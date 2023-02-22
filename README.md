@@ -18,10 +18,15 @@ EXTRA FEATURES
 
 - [X] check if email is already registered, if so, notify at signup, maybe also if login is bad, once user has completed survey, take away option from dash
 
-- [ ] create admin role with elevated privileges to input classes
+- [X] create admin role with elevated privileges to input classes
+
 - [X] implemenation idea: check if user has a certain ID token, if so, give access to them by their token
 
 - [X] make the buttons on index cards with reactbootstrap
+
+- [ ] once student completes survey and sees choices for classes chosen, let them give feedback and thumbs up/down, which should display on admin page
+
+- [ ] student should see history of all recommended courses from a dropdown, this should be a saved in another collection for firestore/realtime db in the user's collection, or make a new collection with just the user's id to grab it from (think about this in the future).
 
 
 ### IMPORTANT
