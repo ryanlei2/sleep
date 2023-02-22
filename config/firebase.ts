@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, addDoc, serverTimestamp, CollectionReference, doc, getDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
-import { getDatabase, ref } from 'firebase/database';
+import { getDatabase, ref, get, child, equalTo, orderByValue } from 'firebase/database';
 import { Auth, sendPasswordResetEmail as firebaseSendPasswordResetEmail } from 'firebase/auth';
 
 
@@ -30,13 +30,25 @@ export const coursesRef = ref(rtdb, "courses");
 export const auth = getAuth();
 
 //collections within the firebase realtime db... also need one for courses.. yea?
-const adminsCollection = collection(db, 'admins');
+export const adminsCollection = collection(db, 'admins');
 
 // Function to check if a user is an admin
-async function checkAdmin(userId: number) {
-  const docRef = doc(adminsCollection, userId.toString());
-  const docSnap = await getDoc(docRef);
-  return docSnap.exists();
+export async function checkAdmin(userId: string) {
+  try {
+    const adminsRef = ref(rtdb, "admins");
+    const snapshot = await get(adminsRef);
+    const admins = snapshot.val();
+    const isAdmin = admins && Object.values(admins).includes(userId);
+    if (isAdmin) {
+      console.log('User is an admin, loading admin dashboard');
+    } else {
+      console.log('User is NOT an admin, loading student dashboard');
+    }
+    return isAdmin;
+  } catch (error) {
+    console.error('Error checking admin status:', error);
+    return false;
+  }
 }
 
 export const sendPasswordResetEmail = async (auth: Auth, email: string) => {

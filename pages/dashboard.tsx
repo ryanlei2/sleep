@@ -1,23 +1,35 @@
-import React from 'react'
-import { auth } from '../config/firebase';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
 import styles from '../styles/dashboard.module.css'
-import Link from 'next/link';
+
+import { useAuth } from '../context/AuthContext'
+import { checkAdmin } from '../config/firebase'
+import AdminDashboard from "../components/AdminDashboard"
+import StudentDashboard from '../components/StudentDashboard'
+import { Container } from 'react-bootstrap'
+import Link from 'next/link'
+
 const Dashboard = () => {
+  const { user } = useAuth()
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    async function fetchAdminStatus() {
+      const isAdmin = await checkAdmin(user.uid)
+      setIsAdmin(isAdmin)
+    }
+
+    fetchAdminStatus()
+  }, [user.uid])
+
   return (
-    <div className={styles.body}>
-      <Container className='display-3'>
-        <i><b>First</b></i> time using Coursee or having trouble deciding on a path? Take our survey!<br></br>
-        <Link href="/survey">
-
-          <button className="surveyBtn" role="button">Survey</button>
-
-        </Link>
-        
-      </Container>
-    </div>
-  );
+    <>
+      {isAdmin ? (
+        <AdminDashboard />
+      ) : (
+        <StudentDashboard />
+      )}
+    </>
+  )
 }
-
 
 export default Dashboard
