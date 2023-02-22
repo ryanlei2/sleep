@@ -37,6 +37,7 @@ const Signup = () => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+          style={{ height: '50px', fontSize:'20px' }}
             type="email"
             placeholder="Enter email"
             required
@@ -53,6 +54,7 @@ const Signup = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
+          style={{ height: '50px', fontSize:'20px' }}
             type="password"
             placeholder="Password"
             required
@@ -66,7 +68,9 @@ const Signup = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit"
+        style={{ height: '40px', fontSize:'20px', marginTop:'30px' }}
+        >
           Signup
         </Button>
       </Form>

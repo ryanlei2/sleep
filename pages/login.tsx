@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useAuth } from '../context/AuthContext'
 
+
 const Login = () => {
   const router = useRouter()
   const { user, login } = useAuth()
@@ -43,6 +44,7 @@ const Login = () => {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+          style={{ height: '50px', fontSize:'20px' }}
             onChange={(e: any) =>
               setData({
                 ...data,
@@ -59,6 +61,7 @@ const Login = () => {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
+          style={{ height: '50px', fontSize:'20px' }}
             onChange={(e: any) =>
               setData({
                 ...data,
@@ -71,13 +74,17 @@ const Login = () => {
             placeholder="Password"
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit"
+        style={{ height: '40px', fontSize:'20px', marginTop:'30px', marginBottom:'15px' }}
+        >
           Login
         </Button>
       </Form>
       <hr></hr>
       <p>New to Coursee? <Link href='/signup'>Sign Up</Link></p>
-      <Button href='PasswordResetForm'>Forgot Password?</Button>
+      <Button href='PasswordResetForm'
+      style={{ height: '40px', fontSize:'20px'}}
+      >Forgot Password?</Button>
 
     </div>
   )
