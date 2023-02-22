@@ -35,9 +35,15 @@ export const adminsCollection = collection(db, 'admins');
 // Function to check if a user is an admin
 export async function checkAdmin(userId: string) {
   try {
+    //refer to admin collection within db
     const adminsRef = ref(rtdb, "admins");
+    //await the current list of admins
     const snapshot = await get(adminsRef);
+    //once gotten set it to constant of all admins
     const admins = snapshot.val();
+    console.log(admins);
+    
+    //check if admins list is not empty and inclues current users id
     const isAdmin = admins && Object.values(admins).includes(userId);
     if (isAdmin) {
       console.log('User is an admin, loading admin dashboard');
