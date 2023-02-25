@@ -337,6 +337,8 @@ function SurveyComp() {
 //   ask about how hard these should be (rigor)
 //       check if each response is not mentioned in core courses so we can take that one out possibly add more options
 //       doesnt matter if theres overlap between stem classes and previous year classes, there should be multiple so they can just not choose those
+
+//choose what classes to take next if all classes of short list are exhausted (this is for interest), FOIR EXAMPLE, if student wants to be an engineer, next classes should be physics then math
     });
   }
   return (
