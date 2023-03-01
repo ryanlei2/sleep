@@ -315,30 +315,11 @@ function SurveyComp() {
       }
 //below is within the analyze surey data method btw
 
-//DEFIENITELY ADD
+//DEFINITELY ADD
 // admin dashboard to see students' responses, they should be able to indicate thumbs up or down based on a career we gave them (short description included) to see if our model can be fixed (store good or bad from survey)
 //ive now added a collection in firestore titled userresults, which shows the grade (grade(s) if taken multiple times thorughout the years) of the user, with the easy, recommended, and hard classes in a document (all attached to same user id)
-      // easy courses as array should be posted to easy field (map)
-      //recommended courses as array go to rec field, etc
 
-// survey logic:
-      //as we iterate throughout the array, add courses to each respective array based on student choices
-// check grade, but dont use it to generate classes (instead use to keep track of when user filled out survey in prev years)
-// see if health and pe fulfilled, otherwise advise to take it
-// check stem career
-//   this is interest, keep track of this
-// check previous classes (ALL PREVIOUS YEARS NOT JUST ONE YEAR BEFORE): math-core, science-core, social-core, la-core, use this to gen next core classes
-// this shouldnt be hard because usually previous high school =core= (not interest <-- this is very broad) classes are generic, eg algebra 1, or la9
-//   create table of easy-hard core classes from this data
-//   IMPORTANT: if AP class taken prev tear give go ahead to recommend ap core class next year, eg science apbio to ap chem--if this is too hard, just remember this will be in the intermediate section and the recommended or easy section will container easier classes
-// go into more depth on stem interest Q's (this is most important so focus on these) 
-//   should be simple enough that db can handle different responses: difficulty, type, etc
-//   IMPORTANT: in the db these should be ranked from best and slowly getting worse for each stem path to maximize advantage, ap classes top rank
-//   ask about how hard these should be (rigor)
-//       check if each response is not mentioned in core courses so we can take that one out possibly add more options
-//       doesnt matter if theres overlap between stem classes and previous year classes, there should be multiple so they can just not choose those
 
-//choose what classes to take next if all classes of short list are exhausted (this is for interest), FOIR EXAMPLE, if student wants to be an engineer, next classes should be physics then math
     });
   }
   return (

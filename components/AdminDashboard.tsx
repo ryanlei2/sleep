@@ -1,14 +1,81 @@
-import React from 'react'
-
-export default function AdminDashboard() {
-  return (
-    <div>
-        <h1 className='display-3'
-        style={{
-          textAlign:'center'
-        }}
-        >AdminDashboard</h1>
-        {/* display survey results and whether or not students approved these, or gave feedback on em */}
-    </div>
-  )
+import { useState, useEffect } from 'react';
+import { collection, deleteDoc, doc, getDocs, onSnapshot } from 'firebase/firestore';
+import { db } from '../config/firebase';
+import { Button, ListGroup } from 'react-bootstrap';
+// This code defines an interface FeedbackData that represents the structure of each feedback item in the array. It also uses the as keyword to cast the data returned from Firebase to the FeedbackData interface to prevent type errors.
+interface FeedbackData {
+  id: string;
+  data: {
+    data: string[];
+    timestamp: {
+      seconds: number;
+      nanoseconds: number;
+    };
+    userId: string;
+  };
 }
+
+function AdminDashboard() {
+  const [feedbackData, setFeedbackData] = useState<FeedbackData[]>([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'userFeedback'), (snapshot) => {
+      const feedbackData: FeedbackData[] = [];
+      snapshot.forEach((doc) => {
+        feedbackData.push({ id: doc.id, data: doc.data() } as FeedbackData);
+      });
+      setFeedbackData(feedbackData);
+    });
+
+    return () => unsubscribe();
+  }, []);
+  
+  //handle the deletetion of data
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteDoc(doc(db, 'userFeedback', id));
+      setFeedbackData(prevState => prevState.filter(feedback => feedback.id !== id));
+    } catch (error) {
+      console.error('Error deleting document:', error);
+    }
+  }
+  // In the return statement, it maps over the feedbackData array and renders a list item for each feedback item. The key prop is set to the id of each item. The feedbackItem.data object is then accessed to display the relevant information in the UI.
+  return (
+    <div
+    style={{
+      fontSize:'2rem',
+      marginLeft:'90px',
+      marginTop:'50px'
+    }}
+    >
+      <h1 className='display-1'
+      style={{
+        fontWeight:'bolder'
+      }}
+      >Admin Dashboard</h1>
+      <h3 className='display-2'
+      style={{
+        marginTop:'30px',
+        marginBottom:'30px'
+      }}
+      >User Feedback</h3>
+      <ul>
+        {feedbackData.map((feedbackItem) => (
+          <li key={feedbackItem.id}>
+            <p>UserID: {feedbackItem.data.userId}</p>
+            <p>Timestamp: {feedbackItem.data.timestamp.seconds}</p>
+            <ul>
+              {feedbackItem.data.data.map((item) => (
+                <li>{item}</li>
+              ))}
+              <Button onClick={() => handleDelete(feedbackItem.id)}>Delete</Button>
+              <br></br><br></br>
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default AdminDashboard;
