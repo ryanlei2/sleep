@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { Nav, Navbar } from 'react-bootstrap'
 import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/router'
@@ -21,7 +21,7 @@ const NavbarComp = () => {
         <Link href="/"  passHref legacyBehavior>
           <Nav.Link className=''>
             <Image 
-            className='me-5 mx-3'
+            className='me-5 mx-4'
               width="80" height="80"
               src={favicon}
               alt='logo'

@@ -4,8 +4,6 @@ import { useAuth } from '../context/AuthContext'
 import { checkAdmin } from '../config/firebase'
 import AdminDashboard from "../components/AdminDashboard"
 import StudentDashboard from '../components/StudentDashboard'
-import { Container } from 'react-bootstrap'
-import Link from 'next/link'
 
 const Dashboard = () => {
   //delay

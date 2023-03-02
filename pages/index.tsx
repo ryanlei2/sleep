@@ -108,9 +108,9 @@ const Home: NextPage = () => {
       >
           <Container className='display-5'
           style={{
-            backgroundColor:'#caf0f8',
-            width:'2000px',
-            height:'300px'
+            // backgroundColor:'#caf0f8',
+            width:'100%',
+            height:'350px',
           }}
           >
             <hr></hr>
@@ -122,7 +122,7 @@ const Home: NextPage = () => {
             >Why Coursee</h1>
             <div
             style={{
-              marginBottom:'70px'
+              marginBottom:'130px',
             }}
             >
               Coursee is a streamlined and free way of choosing your courses without any external guidance.

@@ -116,83 +116,11 @@ const surveyJSON =
     "description": "We need to know your background first."
   },
   {
-    "name": "CCS",
-    "elements": [
-    {
-      "type": "checkbox",
-      "name": "scienceFieldsQuestion",
-      "visibleIf": "{stemInterestQuestion} = 'scienceClass'",
-      "title": "Within the science field, choose the 3 best options that best suit you.",
-      "description": "Remember, the options are to guide you through high school and then funnel your college experience, which can be very tentative.To help you choose, here is a link to science-based career descriptions:<LINK>",
-      "isRequired": true,
-      "choices": [
-        "Item 1",
-        "Item 2",
-        "Item 3",
-        "Item 4",
-        "Item 5",
-        "Item 6"
-      ],
-      "maxSelectedChoices": 3
-    },
-    {
-      "type": "checkbox",
-      "name": "techFieldsQuestion",
-      "visibleIf": "{stemInterestQuestion} = 'techClass'",
-      "title": "Within the technological field, choose the 3 best options that best suit you.",
-      "description": "Remember, the options are to guide you through high school and then funnel your college experience, which can be very tentative.\n\nTo help you choose, here is a link to technology-based career descriptions:\n<LINK>\n",
-      "isRequired": true,
-      "choices": [
-        "Item 1",
-        "Item 2",
-        "Item 3",
-        "Item 4",
-        "Item 5",
-        "Item 6"
-      ]
-    },
-    {
-      "type": "checkbox",
-      "name": "engineerFieldsQuestion",
-      "visibleIf": "{stemInterestQuestion} = 'engineerClass'",
-      "title": "Within the engineering field, choose the 3 best options that best suit you.",
-      "description": "Remember, the options are to guide you through high school and then funnel your college experience, which can be very tentative.\n\nTo help you choose, here is a link to engineering-based\n career descriptions:\n<LINK>\n",
-      "isRequired": true,
-      "choices": [
-        "Item 1",
-        "Item 2",
-        "Item 3",
-        "Item 4",
-        "Item 5",
-        "Item 6"
-      ]
-    },
-    {
-      "type": "checkbox",
-      "name": "mathFieldsQuestion",
-      "visibleIf": "{stemInterestQuestion} = 'mathClass'",
-      "title": "Within the mathematical field, choose the 3 best options that best suit you.",
-      "description": "Remember, the options are to guide you through high school and then funnel your college experience, which can be very tentative.\n\nTo help you choose, here is a link to math-based career descriptions:<LINK>",
-      "isRequired": true,
-      "choices": [
-        "Item 1",
-        "Item 2",
-        "Item 3",
-        "Item 4",
-        "Item 5",
-        "Item 6"
-      ]
-    }
-    ],
-    "title": "Curated Course Selection (CCS)",
-    "description": "In each question, choose as little options as possible to narrow the analysis down to a definitive answer; remember, most of the options will help generate a couple classes that will not defer from the general selection of the required math, science, language arts, or history credits.\n\nThere is no 'perfect' set of classes which you can take to get the exact career path--that's not what highschool is about! "
-  },
-  {
     "name": "CoreCredits",
     "elements": [
     {
       "type": "checkbox",
-      "name": "sophPreReq",
+      "name": "sophPreReqQuestion",
       "visibleIf": "{gradeQuestion} = 10",
       "title": "As a sophomore, check which credits you need to take to pass high school.",
       "isRequired": true,
@@ -217,7 +145,7 @@ const surveyJSON =
     },
     {
       "type": "checkbox",
-      "name": "juniorPreReq",
+      "name": "juniorPreReqQuestion",
       "visibleIf": "{gradeQuestion} = 11\n",
       "title": "As a junior, check which credits you need to take to pass high school.",
       "isRequired": true,
@@ -242,7 +170,7 @@ const surveyJSON =
     },
     {
       "type": "checkbox",
-      "name": "seniorPreReq",
+      "name": "seniorPreReqQuestion",
       "visibleIf": "{gradeQuestion} = 12",
       "title": "As a senior, check which credits you need to take to pass high school.",
       "isRequired": true,
@@ -264,11 +192,22 @@ const surveyJSON =
         "text": "Social Studies"
       }
       ]
-     }
+    }
     ],
     "title": "Core Credits",
     "description": "We use these questions to determine whether we should assign you a core class or give more room for a career class."
-   }
+  },
+  {
+    "name": "page1",
+    "elements": [
+    {
+      "type": "expression",
+      "name": "Final Remarks",
+      "title": "Final Remarks",
+      "description": "That was easy! Now, before we finish the survey, we want to just give you some points of advice before you proceed to your results.\n\nBecause these are so general, we want to give you a good starting point for picking out your own classes. You can tweak what we have shown you, or just stick with the classes if they look good enough for you. The point is, we want you to get bearings set up before you trip over yourself on the perfect classes."
+    }
+    ]
+  }
   ],
   "widthMode": "static"
 }
@@ -308,7 +247,8 @@ function SurveyComp() {
       console.log(`Answer ${index + 1}:`);
       if (Array.isArray(value.answer)) {
         value.answer.forEach((choice: any, i: number) => {
-          console.log(`Choice ${i + 1}: ${choice}`); //get answer as choice if array answer
+          //Choice ${i + 1}
+          console.log(`: ${choice}`); //get answer as choice if array answer
         });
       } else {
         console.log(`${value.answer}`); //get answer as value.answer if singular value
@@ -316,23 +256,23 @@ function SurveyComp() {
 //below is within the analyze surey data method btw
 
 //DEFINITELY ADD
-// admin dashboard to see students' responses, they should be able to indicate thumbs up or down based on a career we gave them (short description included) to see if our model can be fixed (store good or bad from survey)
 //ive now added a collection in firestore titled userresults, which shows the grade (grade(s) if taken multiple times thorughout the years) of the user, with the easy, recommended, and hard classes in a document (all attached to same user id)
 
 
     });
   }
   return (
-    <Container>
+    <div>
       {results ? (
         <div>Survey results: {JSON.stringify(results)}</div>
       ) : (
-        <Survey
+          <Survey
           json={surveyJSON}
           onComplete={handleSurveyComplete}
-        />
+        />        
       )}
-    </Container>
+    </div>
+    
   );
 }
 //gg
