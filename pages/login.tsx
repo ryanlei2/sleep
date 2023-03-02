@@ -36,7 +36,8 @@ const Login = () => {
       style={{
         width: '40%',
         margin: 'auto',
-        fontSize: '2vmax'
+        fontSize: '2vmax',
+        marginTop: '0px'
       }}
     >
       <h1 className="text-center my-3 display-3 ">Login</h1>

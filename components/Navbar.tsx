@@ -12,16 +12,16 @@ const NavbarComp = () => {
   const router = useRouter()
 
   return (
-
       <Navbar expand="xl" sticky='top' className={styles.navBar}
       style={{
-        height:'100px'
+        height:'130px',
+        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
       }}
       >
         <Link href="/"  passHref legacyBehavior>
           <Nav.Link className=''>
             <Image 
-            className='me-5 mx-4'
+            className='me-5 mx-4 shadow-lg'
               width="80" height="80"
               src={favicon}
               alt='logo'
@@ -33,7 +33,7 @@ const NavbarComp = () => {
           <Nav
           >
             {user ? (
-              <Nav.Item className="ms-auto display-5">
+              <Nav.Item className="ms-auto display-2">
                 <Nav.Link className='' 
                   onClick={() => {
                     router.push('/dashboard')
@@ -53,7 +53,7 @@ const NavbarComp = () => {
               </>//if not logged in show btn
             ) : (
               <>
-                <Nav.Item className='display-5 ms-auto'>
+                <Nav.Item className='display-2 ms-auto'>
                   <Nav.Link href='/about' className='' aria-current="page">
                     about
                   </Nav.Link>
@@ -67,7 +67,7 @@ const NavbarComp = () => {
               </>//if not logged in show btn
             ) : (
               <>
-                <Nav.Item className='display-5 ms-auto'>
+                <Nav.Item className='display-2 ms-auto'>
                   <Nav.Link href='/faq' className='' aria-current="page"
                   >
                     FAQ
@@ -78,7 +78,7 @@ const NavbarComp = () => {
         </Nav>
         <Nav className='container-fluid'>
           {user ? (
-            <Nav.Item className="ms-auto display-5">
+            <Nav.Item className="ms-auto display-2">
               <Nav.Link className=''
                 onClick={() => {
                   logout()
@@ -90,7 +90,7 @@ const NavbarComp = () => {
             </Nav.Item>
           ) : (
             <>
-              <Nav.Item className='ms-auto display-5'>
+              <Nav.Item className='ms-auto display-2'>
                 <Nav.Link href='/login' className='' aria-current="page">
                   login
                 </Nav.Link>

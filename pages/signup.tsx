@@ -29,7 +29,8 @@ const Signup = () => {
       style={{
         width: '40%',
         margin: 'auto',
-        fontSize: '2vmax'
+        fontSize: '2vmax',
+        marginTop: '60px'
       }}
     >
       <h1 className="text-center my-3 display-3">Signup</h1>
