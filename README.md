@@ -1,3 +1,8 @@
+# Coursee
+![image](https://user-images.githubusercontent.com/37818919/222242389-c5afd4cf-2130-469b-a7d4-97b7543f26cf.png)
+
+
+
 # Running Coursee
 Install yarn first to package the project
 
