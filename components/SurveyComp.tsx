@@ -4,8 +4,8 @@ import { StylesManager, Survey } from 'survey-react';
 import "survey-core/defaultV2.css";
 import 'firebase/database';
 import * as firebase from 'firebase/app';
-import { coursesRef, userSelectionRef, saveSurveyData } from '../config/firebase';
-import { push, ref, set } from 'firebase/database';
+import { coursesRef, rtdb, userSelectionRef, saveSurveyData } from '../config/firebase';
+import { child, get, onValue, push, ref, set } from 'firebase/database';
 import { getDatabase } from "firebase/database";
 
 //paste in te survey from surveyJS
@@ -119,6 +119,27 @@ const surveyJSON =
     "name": "CoreCredits",
     "elements": [
     {
+      "type": "radiogroup",
+      "name": "freshMathCheck",
+      "visibleIf": "{gradeQuestion} = 9",
+      "title": "As a freshman, check which math you took previously in middle school.",
+      "isRequired": true,
+      "choices": [
+      {
+        "value": "genMath",
+        "text": "General Math 3"
+      },
+      {
+        "value": "geometry",
+        "text": "Geometry"
+      },
+      {
+        "value": "algebra",
+        "text": "Algebra 1"
+      }
+      ]
+    },
+    {
       "type": "checkbox",
       "name": "sophPreReqQuestion",
       "visibleIf": "{gradeQuestion} = 10",
@@ -198,7 +219,7 @@ const surveyJSON =
     "description": "We use these questions to determine whether we should assign you a core class or give more room for a career class."
   },
   {
-    "name": "page1",
+    "name": "page3",
     "elements": [
     {
       "type": "expression",
@@ -206,7 +227,8 @@ const surveyJSON =
       "title": "Final Remarks",
       "description": "That was easy! Now, before we finish the survey, we want to just give you some points of advice before you proceed to your results.\n\nBecause these are so general, we want to give you a good starting point for picking out your own classes. You can tweak what we have shown you, or just stick with the classes if they look good enough for you. The point is, we want you to get bearings set up before you trip over yourself on the perfect classes."
     }
-    ]
+    ],
+    "title": "You Did it!"
   }
   ],
   "widthMode": "static"
@@ -238,12 +260,29 @@ function SurveyComp() {
   };
 
   //look at data and select courses
-  function analyzeSurveyData(data: any[]) {
-    const easyClasses = new Array(6);
-    const recommendedClasses = new Array(6);
-    const hardClasses = new Array(6);
-    //pass is Richlandhigh420
-    data.forEach((value, index) => {
+  function analyzeSurveyData(dataArray: any[]) {
+    const easyMathClasses = new Array();
+    const easyScienceClasses = new Array();
+    const easySocialClasses = new Array();
+    const easyLAClasses = new Array();
+
+    const recommendedMathClasses = new Array();
+    const recommendedScienceClasses = new Array();
+    const recommendedSocialClasses = new Array();
+    const recommendedLAClasses = new Array();
+
+    const hardMathClasses = new Array();
+    const hardScienceClasses = new Array();
+    const hardSocialClasses = new Array();
+    const hardLAClasses = new Array();
+
+    let rigor: any;
+    let grade: any;
+
+
+    const sections = ["science", "math", "la", "social"];
+
+    dataArray.forEach((value, index) => {
       console.log(`Answer ${index + 1}:`);
       if (Array.isArray(value.answer)) {
         value.answer.forEach((choice: any, i: number) => {
@@ -252,14 +291,158 @@ function SurveyComp() {
         });
       } else {
         console.log(`${value.answer}`); //get answer as value.answer if singular value
+        //freshmen math
+        if (index === 4 && value.answer === 'genMath') {
+          console.log('genmath chosen');
+            easyMathClasses.push('Algebra 1')
+            recommendedMathClasses.push('Algebra 1')
+            hardMathClasses.push('Algebra 1')
+          console.log('science must-have');
+            easyScienceClasses.push('Introduction to Chemistry')
+            recommendedScienceClasses.push('Introduction to Chemistry')
+            hardScienceClasses.push('Introduction to Chemistry')
+        } else if (value.answer === 'geometry') {
+          console.log('geometry chosen');
+            easyMathClasses.push('Algebra 2')
+            recommendedMathClasses.push('Algebra 2 Honors')
+            hardMathClasses.push('Algebra 2 Honors')
+        } else if (value.answer === 'algebra') {
+          console.log('algebra chosen');
+            easyMathClasses.push('Geometry')
+            recommendedMathClasses.push('Geometry Honors')
+            hardMathClasses.push('Geometry Honors')
+        }
+
+        if (index === 1) {
+          rigor = value.answer
+        }
+        //soph+ math
+        if (index === 0) {
+          grade = value.answer
+        }
+        //grab all courses with that grade and shoot them into the right arrays with their rigor
       }
-//below is within the analyze surey data method btw
-
-//DEFINITELY ADD
-//ive now added a collection in firestore titled userresults, which shows the grade (grade(s) if taken multiple times thorughout the years) of the user, with the easy, recommended, and hard classes in a document (all attached to same user id)
-
-
     });
+//ive now added a collection in firestore titled userresults, which shows the grade (grade(s) if taken multiple times thorughout the years) of the user, with the easy, recommended, and hard classes in a document (all attached to same user id
+    
+const coursesRef = ref(rtdb, 'courses');
+
+onValue(coursesRef, (snapshot) => {
+  const sections = ['science', 'math', 'la', 'social'];
+  
+  sections.forEach((section) => {
+    const sectionRef = child(coursesRef, section);
+    onValue(sectionRef, (sectionSnapshot) => {
+      sectionSnapshot.forEach((courseSnapshot) => {
+        const course = courseSnapshot.val();
+        const grades = course.grade?.split(",") ?? [];
+        
+        if (grades.includes(String(grade))) {
+          console.log(`Found course with grade ${grade}: ${courseSnapshot.key}`);
+          //lowerlevel of course (property)
+          const gradeRef = child(courseSnapshot.ref, "grade");
+          const rigorRef = child(courseSnapshot.ref, "rigor");
+          //not part of property, more like brand
+          const courseName= courseSnapshot.key;
+          const courseSection = sectionSnapshot.key;
+          let courseRigor;
+          let courseGrade;
+          onValue(gradeRef, (gradeSnapshot) => {
+            courseGrade = gradeSnapshot.val();
+            console.log(`Course grade(s): ${courseGrade}`);
+          });
+          onValue(rigorRef, (rigorSnapshot) => {
+            courseRigor = rigorSnapshot.val();
+            console.log(`Course rigor: ${courseRigor}`);
+          });
+          console.log(courseName);
+          console.log(courseSection);
+          
+          if (courseSection === 'science') {
+            if (courseRigor === 'easy') {
+              console.log('hellow');
+              //HAHHA YES NOW ADD IT TO THE ARRAY THEN PUT IT ON TABLE AND FINALLY ADD BTTON TO UIP IT
+            }
+          } else if (courseSection === 'math') {
+
+          } else if (courseSection === 'la') {
+
+          } else if (courseSection === 'social') {
+
+          }
+          
+        } else {
+          console.log(`Could not find any courses with grade ${grade}`);
+        }
+      });
+    });
+  });
+});
+// switch (course.rigor) {
+            //   case "easy":
+            //     if (section === "science") {
+            //       easyScienceClasses.push(courseSnapshot.key);
+            //     } else if (section === "math") {
+            //       easyMathClasses.push(courseSnapshot.key);
+            //     } else if (section === "la") {
+            //       easyLAClasses.push(courseSnapshot.key);
+            //     } else if (section === "social") {
+            //       easySocialClasses.push(courseSnapshot.key);
+            //     }
+            //     break;
+            //   case "recommended":
+            //     if (section === "science") {
+            //       recommendedScienceClasses.push(courseSnapshot.key);
+            //     } else if (section === "math") {
+            //       recommendedMathClasses.push(courseSnapshot.key);
+            //     } else if (section === "la") {
+            //       recommendedLAClasses.push(courseSnapshot.key);
+            //     } else if (section === "social") {
+            //       recommendedSocialClasses.push(courseSnapshot.key);
+            //     }
+            //     break;
+            //   case "intermediate":
+            //     if (section === "science") {
+            //       hardScienceClasses.push(courseSnapshot.key);
+            //     } else if (section === "math") {
+            //       hardMathClasses.push(courseSnapshot.key);
+            //     } else if (section === "la") {
+            //       hardLAClasses.push(courseSnapshot.key);
+            //     } else if (section === "social") {
+            //       hardSocialClasses.push(courseSnapshot.key);
+            //     }
+            //     break;
+            // }
+
+
+
+
+
+
+
+
+
+
+
+
+      console.log(rigor);
+      console.log(grade);
+      
+      
+      console.log(easyMathClasses);
+      console.log(easyScienceClasses);
+      console.log(easySocialClasses);
+      console.log(easyLAClasses);
+
+      console.log(recommendedMathClasses);
+      console.log(recommendedScienceClasses);
+      console.log(recommendedSocialClasses);
+      console.log(recommendedLAClasses);
+
+      console.log(hardMathClasses);
+      console.log(hardScienceClasses);
+      console.log(hardSocialClasses);
+      console.log(hardLAClasses);
   }
   return (
     <div>

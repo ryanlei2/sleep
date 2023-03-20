@@ -9,9 +9,9 @@ interface FeedbackData {
     data: string[];
     timestamp: {
       seconds: number;
-      nanoseconds: number;
     };
     userId: string;
+    userEmail: string;
   };
 }
 
@@ -61,16 +61,26 @@ function AdminDashboard() {
       >User Feedback</h3>
       <ul>
         {feedbackData.map((feedbackItem) => (
-          <li key={feedbackItem.id}>
+          <li
+            key={feedbackItem.id}
+            style={{
+              border: '4px solid gray',
+              boxShadow: '10px 10px 8px #888888',
+              padding: '10px',
+              listStyleType: 'none',
+              marginBottom: '40px'
+            }}
+          >
+            <p>Email: {feedbackItem.data.userEmail}</p>
             <p>UserID: {feedbackItem.data.userId}</p>
-            <p>Timestamp: {feedbackItem.data.timestamp.seconds}</p>
+            <p>Date: {new Date(feedbackItem.data.timestamp.seconds * 1000).toLocaleDateString()}</p>
             <ul>
-              {feedbackItem.data.data.map((item) => (
-                <li>{item}</li>
+              {feedbackItem.data.data.map((item, index) => (
+                <li key={index}>{item}</li>
               ))}
-              <Button onClick={() => handleDelete(feedbackItem.id)}>Delete</Button>
-              <br></br><br></br>
             </ul>
+            <Button onClick={() => handleDelete(feedbackItem.id)}>Delete</Button>
+            <br></br><br></br>
           </li>
         ))}
       </ul>

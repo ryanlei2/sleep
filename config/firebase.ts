@@ -24,8 +24,8 @@ export const userSelectionRef = collection(db, "userSelection");
 export const userFeedbackRef = collection(db, "userFeedback");
 
 // Realtime Database reference from app
-const rtdb = getDatabase(app);
-export const coursesRef = ref(rtdb, "courses");
+export const rtdb = getDatabase(app);
+export const coursesRef = ref(rtdb, "courses") 
 
 // Auth
 export const auth = getAuth();
@@ -93,6 +93,12 @@ export function saveSurveyData(surveyData: { question: string; answer: any; }[])
 export function saveUserFeedback(feedback: string[]) {
   //take user id
   const userId = auth.currentUser?.uid;
+  const email = auth.currentUser?.email;
+  console.log(email);
+  if (!email) {
+    console.error('User email not available.');
+    return;
+  }
   if (!userId) {
     console.error('User is not logged in.');
     return;
@@ -100,8 +106,8 @@ export function saveUserFeedback(feedback: string[]) {
   //add document to the userSelectionRef firestore db with time added and data, which is user feedback
   addDoc(userFeedbackRef, {
     userId: userId,
-    timestamp: serverTimestamp(),
-    data: feedback,
+    userEmail: email,
+    date: new Date().toLocaleDateString('en-GB')
   })
     .then(() => {
       console.log("User feedback saved successfully to Cloud Firestore!");

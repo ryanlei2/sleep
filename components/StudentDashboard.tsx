@@ -15,7 +15,6 @@ const StudentDashboard = () => {
       </Container>
     </div>
     </Container>
-    
   )
 }
 
