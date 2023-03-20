@@ -361,7 +361,7 @@ onValue(coursesRef, (snapshot) => {
           if (courseSection === 'science') {
             if (courseRigor === 'easy') {
               console.log('hellow');
-              //HAHHA YES NOW ADD IT TO THE ARRAY THEN PUT IT ON TABLE AND FINALLY ADD BTTON TO UIP IT
+              //HAHHA YES NOW ADD IT TO THE ARRAY THEN PUT IT ON TABLE AND FINALLY ADD BTTON TO UIP IT.
             }
           } else if (courseSection === 'math') {
 
