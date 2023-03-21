@@ -6,3 +6,12 @@
 .Nav.Link[aria-current] {
     background-color: black;
 }
+
+.brandIconHover{
+    transition: all 0.2s ease-out;
+}
+.brandIconHover:hover {
+    transition: all 0.2s ease-out;
+    transform-origin: center center;
+    transform: scale(1.1);
+}

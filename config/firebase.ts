@@ -22,6 +22,7 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const userSelectionRef = collection(db, "userSelection");
 export const userFeedbackRef = collection(db, "userFeedback");
+export const userResultsRef = collection(db, "userResults");
 
 // Realtime Database reference from app
 export const rtdb = getDatabase(app);

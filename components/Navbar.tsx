@@ -19,9 +19,13 @@ const NavbarComp = () => {
       }}
       >
         <Link href="/"  passHref legacyBehavior>
-          <Nav.Link className=''>
+          <Nav.Link className={styles.brandIconHover}>
             <Image 
-            className='me-5 mx-4 shadow-lg'
+            className='shadow-lg'
+            style={{
+              marginLeft: '30px',
+              marginRight: '30px',
+            }}
               width="80" height="80"
               src={favicon}
               alt='logo'
