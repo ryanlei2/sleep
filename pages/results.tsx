@@ -1,6 +1,24 @@
 import React, { useState } from 'react';
 import { Container, Table, Button, Form } from 'react-bootstrap';
 import { saveUserFeedback } from '../config/firebase';
+import {
+  easyMathClasses,
+  easyScienceClasses,
+  easySocialClasses,
+  easyLAClasses,
+  recommendedMathClasses,
+  recommendedScienceClasses,
+  recommendedSocialClasses,
+  recommendedLAClasses,
+  hardMathClasses,
+  hardScienceClasses,
+  hardSocialClasses,
+  hardLAClasses,
+  recommendedClassesConsider,
+  stemChoicesBasedOnRigor
+} from '../components/SurveyComp';
+import { useLocation } from 'react-router-dom';
+
 
 const Results = () => {
   const [feedback, setFeedback] = useState('');
@@ -30,7 +48,7 @@ const Results = () => {
           <Table striped bordered>
             <thead>
               <tr>
-                <th rowSpan={2}>Grade:</th>
+                <th></th>
                 <th>Recommended</th>
                 <th>Intermediate</th>
                 <th>Easy</th>
@@ -39,37 +57,37 @@ const Results = () => {
             <tbody>
               <tr>
                 <td>Math</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{recommendedMathClasses.join(", ")}</td>
+                <td>{hardMathClasses.join(", ")}</td>
+                <td>{easyMathClasses.join(", ")}</td>
               </tr>
               <tr>
                 <td>Science</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{recommendedScienceClasses.join(", ")}</td>
+                <td>{hardScienceClasses.join(", ")}</td>
+                <td>{easyScienceClasses.join(", ")}</td>
               </tr>
               <tr>
                 <td>Social</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{recommendedSocialClasses.join(", ")}</td>
+                <td>{hardSocialClasses.join(", ")}</td>
+                <td>{easySocialClasses.join(", ")}</td>
               </tr>
               <tr>
                 <td>LA</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{recommendedLAClasses.join(", ")}</td>
+                <td>{hardLAClasses.join(", ")}</td>
+                <td>{easyLAClasses.join(", ")}</td>
               </tr>
               <tr>
                 <td>STEM</td>
-                <td></td>
+                <td>{stemChoicesBasedOnRigor.join(", ")}</td>
                 <td></td>
                 <td></td>
               </tr>
               <tr>
                 <td>Classes to Consider:</td>
-                <td></td>
+                <td>{recommendedClassesConsider.join(", ")}</td>
                 <td></td>
                 <td></td>
               </tr>

@@ -142,6 +142,7 @@ const surveyJSON =
     {
       "type": "checkbox",
       "name": "sophPreReqQuestion",
+      "visible": false,
       "visibleIf": "{gradeQuestion} = 10",
       "title": "As a sophomore, check which credits you need to take to pass high school.",
       "isRequired": true,
@@ -167,6 +168,7 @@ const surveyJSON =
     {
       "type": "checkbox",
       "name": "juniorPreReqQuestion",
+      "visible": false,
       "visibleIf": "{gradeQuestion} = 11\n",
       "title": "As a junior, check which credits you need to take to pass high school.",
       "isRequired": true,
@@ -192,6 +194,7 @@ const surveyJSON =
     {
       "type": "checkbox",
       "name": "seniorPreReqQuestion",
+      "visible": false,
       "visibleIf": "{gradeQuestion} = 12",
       "title": "As a senior, check which credits you need to take to pass high school.",
       "isRequired": true,
@@ -233,7 +236,23 @@ const surveyJSON =
   ],
   "widthMode": "static"
 }
+    export let easyMathClasses: string[] = []
+    export let easyScienceClasses: string[] = []
+    export let easySocialClasses: string[] = []
+    export let easyLAClasses: string[] = []
 
+    export let recommendedMathClasses: string[] = []
+    export let recommendedScienceClasses: string[] = []
+    export let recommendedSocialClasses: string[] = []
+    export let recommendedLAClasses: string[] = []
+
+    export let hardMathClasses: string[] = []
+    export let hardScienceClasses: string[] = []
+    export let hardSocialClasses: string[] = []
+    export let hardLAClasses: string[] = []
+
+    export let recommendedClassesConsider: string[] = []
+    export let stemChoicesBasedOnRigor: string[] = []
 function SurveyComp() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -258,67 +277,16 @@ function SurveyComp() {
     analyzeSurveyData(dataArray)
     saveSurveyData(dataArray); // Save survey data to Firestore
   };
-    let easyMathClasses: string[] = []
-    let easyScienceClasses: string[] = []
-    let easySocialClasses: string[] = []
-    let easyLAClasses: string[] = []
-
-    let recommendedMathClasses: string[] = []
-    let recommendedScienceClasses: string[] = []
-    let recommendedSocialClasses: string[] = []
-    let recommendedLAClasses: string[] = []
-
-    let hardMathClasses: string[] = []
-    let hardScienceClasses: string[] = []
-    let hardSocialClasses: string[] = []
-    let hardLAClasses: string[] = []
-
-    function getEasyMath() {
-
-    }
-    function getEasyScience() {
-
-    }
-    function getEasySocial() {
-
-    }
-    function getEasyLA() {
-
-    }
-
-    function getHardMath() {
-
-    }
-    function getHardScience() {
-
-    }
-    function getHardSocial() {
-
-    }
-    function getHardLA() {
-
-    }
-
-    function getRecommendedMath() {
-
-    }
-    function getRecommendedScience() {
-
-    }
-    function getRecommendedSocial() {
-
-    }
-    function getRecommendedLA() {
-
-    }
+    
   //look at data and select courses
     function analyzeSurveyData(dataArray: any[]) {
 
     let rigor: any;
     let grade: any;
+    let remainderClasses: any;
     let choseEngineering = false
     let choseTechnology = false
-    let stemChoicesBasedOnRigor: string[] = []
+    
 
     dataArray.forEach((value, index) => {
       console.log(`Answer ${index + 1}:`);
@@ -350,6 +318,9 @@ function SurveyComp() {
             console.log('user chose technology');
           }
         }
+        if (index === 2) {
+          remainderClasses = value.answer;
+        }
         //grab all courses with that grade and shoot them into the right arrays with their rigor
       }
     });
@@ -359,13 +330,27 @@ const coursesRef = ref(rtdb, 'courses');
 
 onValue(coursesRef, (snapshot) => {
   const sections = ['science', 'math', 'la', 'social', 'engineer', 'technology'];
-
+  if (grade == 9) {
+      easyScienceClasses.push("Introduction to Chemistry");
+      hardScienceClasses.push("Introduction to Chemistry");
+      recommendedScienceClasses.push("Introduction to Chemistry");
+  }
+  if (remainderClasses === 'none') {
+    recommendedClassesConsider.push('pe');
+    recommendedClassesConsider.push('health');
+  } else if (remainderClasses === 'pe') {
+    recommendedClassesConsider.push('health');
+  } else if (remainderClasses === 'health'){
+    recommendedClassesConsider.push('PE');
+  }
+  
   sections.forEach((section) => {
     const sectionRef = child(coursesRef, section);
     onValue(sectionRef, (sectionSnapshot) => {
       sectionSnapshot.forEach((courseSnapshot) => {
         const course = courseSnapshot.val();
         const grades = course.grade?.split(",") ?? [];
+        
         
         if (grades.includes(String(grade))) {
           console.log(`Found course with grade ${grade}: ${courseSnapshot.key}`);
@@ -390,7 +375,6 @@ onValue(coursesRef, (snapshot) => {
           });
           //console.log(courseName);
           //console.log(courseSection);
-          
           if (courseSection === 'science') {
             if (courseRigor === 'easy') {
               easyScienceClasses.push(courseName + "");
@@ -400,32 +384,25 @@ onValue(coursesRef, (snapshot) => {
             } else if (courseRigor === 'recommended') {
               recommendedScienceClasses.push(courseName + "");
             }
-            if (grade === 9) {
-              easyScienceClasses.push("Introduction to Chemistry");
-              hardScienceClasses.push("Introduction to Chemistry");
-              recommendedScienceClasses.push("Introduction to Chemistry");
-            }
-          } else if (courseSection === 'math') {
+          } else if (courseSection == 'math') {
             if (courseRigor === 'easy') {
-              if (grade !== 9) {
+              if (grade != 9) {
+                console.log(grade);
                 easyMathClasses.push(courseName + "");
-              } else if (grade === 9) {
+              } else if (grade == 9) {
+                console.log('9th grader');
                 dataArray.forEach((value, index) => {
-                  if (index === 4 && value.answer === 'genMath') {
+                  if (index == 4 && value.answer == 'genMath') {
                     console.log('genmath chosen');
                       easyMathClasses.push('Algebra 1')
                       recommendedMathClasses.push('Algebra 1')
                       hardMathClasses.push('Algebra 1')
-                    console.log('science must-have');
-                      easyScienceClasses.push('Introduction to Chemistry')
-                      recommendedScienceClasses.push('Introduction to Chemistry')
-                      hardScienceClasses.push('Introduction to Chemistry')
-                  } else if (value.answer === 'geometry') {
+                  } else if (value.answer == 'geometry') {
                     console.log('geometry chosen');
                       easyMathClasses.push('Algebra 2')
                       recommendedMathClasses.push('Algebra 2 Honors')
                       hardMathClasses.push('Algebra 2 Honors')
-                  } else if (value.answer === 'algebra') {
+                  } else if (value.answer == 'algebra') {
                     console.log('algebra chosen');
                       easyMathClasses.push('Geometry')
                       recommendedMathClasses.push('Geometry Honors')
@@ -494,6 +471,25 @@ onValue(coursesRef, (snapshot) => {
 });
 
 
+      //if array emtpy, fill with prev array (manually)
+      /*
+    let easyMathClasses: string[] = []
+    let easyScienceClasses: string[] = []
+    let easySocialClasses: string[] = []
+    let easyLAClasses: string[] = []
+
+    let recommendedMathClasses: string[] = []
+    let recommendedScienceClasses: string[] = []
+    let recommendedSocialClasses: string[] = []
+    let recommendedLAClasses: string[] = []
+
+    let hardMathClasses: string[] = []
+    let hardScienceClasses: string[] = []
+    let hardSocialClasses: string[] = []
+    let hardLAClasses: string[] = []
+      */
+
+
       console.log('rigor:' + rigor);
       console.log('grade' + grade);
       
@@ -517,11 +513,60 @@ onValue(coursesRef, (snapshot) => {
 
       console.log("stem classes");
       console.log(stemChoicesBasedOnRigor);
+
+      console.log('rest of the classes to consider');
+      console.log(recommendedClassesConsider);
+      
+            //populate hard courses with easy
+      if (hardMathClasses.length == 0) {
+        console.log('hard math empty');
+        hardMathClasses.push(...easyMathClasses);
+      }
+      if (hardScienceClasses.length == 0) {
+        console.log('hard science empty' + hardScienceClasses);
+        hardScienceClasses.push(...easyScienceClasses);
+      }
+      if (hardSocialClasses.length == 0) {
+        console.log('hard social empty' + hardSocialClasses);
+        hardSocialClasses.push(...easySocialClasses);
+      }
+      if (hardLAClasses.length == 0) {
+        console.log('hard LA empty' + hardLAClasses);
+        hardLAClasses.push(...easyLAClasses);
+      }
+      //populate recommended courses with hard
+      setTimeout(() => { //LOL IT WAS LAGGING
+      if (recommendedMathClasses.length == 0) {
+        console.log('recomennded math empty' + recommendedMathClasses);
+        recommendedMathClasses.push(...hardMathClasses);
+      }
+      if (recommendedScienceClasses.length == 0) {
+        console.log('recomennded science empty' + recommendedScienceClasses);
+        recommendedScienceClasses.push(...hardScienceClasses);
+      }
+      if (recommendedSocialClasses.length == 0) {
+        console.log('recomennded social empty' + recommendedSocialClasses);
+        recommendedSocialClasses.push(...hardSocialClasses);
+      }
+      if (recommendedLAClasses.length == 0) {
+        console.log('recomennded la empty' + recommendedLAClasses + ',' + hardLAClasses);
+        recommendedLAClasses.push(...hardLAClasses);
+      }
+        }, 5000);
       
       // now add these array results to the collection userResults
       //add it to a new document in it, and have a group called easyCourses, which contains the fields math, science
 
+      //finally have them grabbed by results page and fuicking displayed FUCK
+
       
+  }
+
+  function getNextCourse(rigor: string, courseName: string) {
+    //loop through database till find course, then look one level deeper to the rnexteasy, etc
+    if (rigor === 'easy') {
+      //take courses next easiest course and put it on datatable
+    }
   }
   return (
     <div>
