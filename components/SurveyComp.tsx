@@ -7,6 +7,8 @@ import * as firebase from 'firebase/app';
 import { coursesRef, rtdb, userResultsRef, userSelectionRef, saveSurveyData } from '../config/firebase';
 import { child, get, onValue, push, ref, set } from 'firebase/database';
 import { getDatabase } from "firebase/database";
+import { useRouter } from 'next/router'
+import { Link } from 'react-router-dom';
 
 //paste in te survey from surveyJS
 const surveyJSON = 
@@ -14,7 +16,7 @@ const surveyJSON =
   "title": "Career Survey",
   "description": "Give us some general knowledge on the career you want to choose.",
   "logoPosition": "right",
-  "completedHtml": "<h3>Great, thank you for completing the survey! You'll soon see your results.</h3>\n      <a href='/results'> Results </a>\n",
+  "completedHtml": "<h3>Great, thank you for completing the survey! You'll soon see your results.</h3>\n      \n",
   "pages": [
   {
     "name": "SchoolQuestions",
@@ -236,24 +238,71 @@ const surveyJSON =
   ],
   "widthMode": "static"
 }
-    export let easyMathClasses: string[] = []
-    export let easyScienceClasses: string[] = []
-    export let easySocialClasses: string[] = []
-    export let easyLAClasses: string[] = []
 
-    export let recommendedMathClasses: string[] = []
-    export let recommendedScienceClasses: string[] = []
-    export let recommendedSocialClasses: string[] = []
-    export let recommendedLAClasses: string[] = []
-
-    export let hardMathClasses: string[] = []
-    export let hardScienceClasses: string[] = []
-    export let hardSocialClasses: string[] = []
-    export let hardLAClasses: string[] = []
-
-    export let recommendedClassesConsider: string[] = []
-    export let stemChoicesBasedOnRigor: string[] = []
 function SurveyComp() {
+  const router = useRouter()
+
+  let easyMathClasses: string[] = []
+  let easyScienceClasses: string[] = []
+  let easySocialClasses: string[] = []
+  let easyLAClasses: string[] = []
+
+  let recommendedMathClasses: string[] = []
+  let recommendedScienceClasses: string[] = []
+  let recommendedSocialClasses: string[] = []
+  let recommendedLAClasses: string[] = []
+
+  let hardMathClasses: string[] = []
+  let hardScienceClasses: string[] = []
+  let hardSocialClasses: string[] = []
+  let hardLAClasses: string[] = []
+
+  let recommendedClassesConsider: string[] = []
+  let stemChoicesBasedOnRigor: string[] = []
+
+  const handleClick = () => {
+    // router.push({
+    //   pathname: '../pages/results',
+    //   query: {
+    //     data: JSON.stringify({
+    //       easyMathClasses,
+    //       easySocialClasses,
+    //       easyScienceClasses,
+    //       easyLAClasses,
+    //       recommendedMathClasses,
+    //       recommendedScienceClasses,
+    //       recommendedSocialClasses,
+    //       recommendedLAClasses,
+    //       hardMathClasses,
+    //       hardScienceClasses,
+    //       hardSocialClasses,
+    //       hardLAClasses,
+    //       recommendedClassesConsider,
+    //       stemChoicesBasedOnRigor,
+    //     }),
+    //   },
+    // })
+    router.push({
+      pathname: '../pages/results',
+      query: {
+        easyMathClasses: JSON.stringify(easyMathClasses),
+        easySocialClasses: JSON.stringify(easySocialClasses),
+        easyScienceClasses: JSON.stringify(easyScienceClasses),
+        easyLAClasses: JSON.stringify(easyLAClasses),
+        recommendedMathClasses: JSON.stringify(recommendedMathClasses),
+        recommendedScienceClasses: JSON.stringify(recommendedScienceClasses),
+        recommendedSocialClasses: JSON.stringify(recommendedSocialClasses),
+        recommendedLAClasses: JSON.stringify(recommendedLAClasses),
+        hardMathClasses: JSON.stringify(hardMathClasses),
+        hardScienceClasses: JSON.stringify(hardScienceClasses),
+        hardSocialClasses: JSON.stringify(hardSocialClasses),
+        hardLAClasses: JSON.stringify(hardLAClasses),
+        recommendedClassesConsider: JSON.stringify(recommendedClassesConsider),
+        stemChoicesBasedOnRigor: JSON.stringify(stemChoicesBasedOnRigor),
+      },
+    });
+  }
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       StylesManager.applyTheme("defaultV2");
@@ -276,6 +325,14 @@ function SurveyComp() {
     console.log(dataArray);
     analyzeSurveyData(dataArray)
     saveSurveyData(dataArray); // Save survey data to Firestore
+
+    router.push({
+      pathname: '/results',
+      query: {
+        data: JSON.stringify({easyMathClasses,easySocialClasses,easyScienceClasses,easyLAClasses,recommendedMathClasses,recommendedScienceClasses,recommendedSocialClasses,recommendedLAClasses,hardMathClasses,hardScienceClasses,hardSocialClasses,hardLAClasses,recommendedClassesConsider,stemChoicesBasedOnRigor,
+        }),
+      },
+    })
   };
     
   //look at data and select courses
@@ -558,7 +615,7 @@ onValue(coursesRef, (snapshot) => {
       //add it to a new document in it, and have a group called easyCourses, which contains the fields math, science
 
       //finally have them grabbed by results page and fuicking displayed FUCK
-
+      
       
   }
 
@@ -573,10 +630,13 @@ onValue(coursesRef, (snapshot) => {
       {results ? (
         <div>Survey results: {JSON.stringify(results)}</div>
       ) : (
+        <div>
           <Survey
           json={surveyJSON}
           onComplete={handleSurveyComplete}
-        />        
+          /> 
+            {/* <button onClick={handleClick}>Results</button> */}
+        </div> 
       )}
     </div>
     
