@@ -5,7 +5,10 @@ import styles from '../styles/dashboard.module.css'
 
 const StudentDashboard = () => {
   return (
-    <Container className={styles.body}>
+    <Container className={styles.body} style={{
+      marginBottom: '900px',
+      marginTop: '200px'
+    }}>
       <div>
       <Container className='display-3 my-5'>
         <i><b>First</b></i> time using Coursee or having trouble deciding on a path? Take our survey!<br></br>

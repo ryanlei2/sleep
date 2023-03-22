@@ -1,6 +1,8 @@
 .navBar {
     z-index: 1;
     background-color: #f1f1f1;
+    position: fixed;
+    width: 100%;
 }
 
 .Nav.Link[aria-current] {

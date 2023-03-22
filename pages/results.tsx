@@ -9,8 +9,7 @@ import { arrayBuffer } from 'stream/consumers';
 const Results = () => {
 const router = useRouter()
 
-let recommendedConsider: string[] = []
-let stemBasedOnRigor: string[] = []
+
   const data = router.query
 
   const dataObj2:any = router.query.data
@@ -42,6 +41,25 @@ let stemBasedOnRigor: string[] = []
     convertArrayToObject(dataObj.stemChoicesBasedOnRigor)
   ];
   
+  let easyScience: string[] = dataObj.easyScienceClasses
+  console.log(easyScience);
+  let easyMath: string[] = dataObj.easyMathClasses
+  let easySocial: string[] = dataObj.easySocialClasses
+  let easyLA: string[] = dataObj.easyLAClasses
+
+  let hardMath: string[] = dataObj.hardMathClasses
+  let hardScience: string[] = dataObj.hardScienceClasses
+  let hardSocial: string[] = dataObj.hardSocialClasses
+  let hardLA: string[] = dataObj.hardLAClasses
+
+  let recommendedMath: string[] = dataObj.recommendedMathClasses
+  let recommendedScience: string[] = dataObj.recommendedScienceClasses
+  let recommendedSocial: string[] = dataObj.recommendedSocialClasses
+  let recommendedLA: string[] = dataObj.recommendedLAClasses
+
+  let recommendedConsider: string[] = dataObj.recommendedClassesConsider
+  let stemBasedOnRigor: string[] = dataObj.stemChoicesBasedOnRigor
+
   const result = [easyClasses, hardClasses, recommendedClasses, otherClasses];
   console.log(result);
 
@@ -56,19 +74,7 @@ let stemBasedOnRigor: string[] = []
   }
   
       
-  let easyScience: string[] = []
-  let easySocial: string[] = []
-  let easyLA: string[] = []
-
-  let recommendedMath: string[] = []
-  let recommendedScience: string[] = []
-  let recommendedSocial: string[] = []
-  let recommendedLA: string[] = []
-
-  let hardMath: string[] = []
-  let hardScience: string[] = []
-  let hardSocial: string[] = []
-  let hardLA: string[] = []
+  
 
   const [feedback, setFeedback] = useState('');
   const [buttonClicked, setButtonClicked] = useState('');
@@ -92,7 +98,7 @@ let stemBasedOnRigor: string[] = []
 
   return (
     <div>
-      <div className='display-5' style={{ textAlign: 'center', marginTop: '6rem' }}>
+      <div className='display-5' style={{ textAlign: 'center', marginTop: '15rem' }}>
         <Container>
           <Table striped bordered>
             <thead>
@@ -171,35 +177,3 @@ let stemBasedOnRigor: string[] = []
 };
 
 export default Results;
-// // Ryan
-// I am using nextJS and reactbootstrap. I am trying to convert a JSON file into a bunch of arrays, after stringify ing them and passing them.
-// Here is what the console logs when I show the data query from the JSON:
-// {"easyMathClasses":["Algebra 1"],"easySocialClasses":["world geography"],"easyScienceClasses":["Introduction to Chemistry"],"easyLAClasses":["language arts 9"],"recommendedMathClasses":["Algebra 1"],"recommendedScienceClasses":["Introduction to Chemistry"],"recommendedSocialClasses":["ap human geography","ap world history"],"recommendedLAClasses":[],"hardMathClasses":["Algebra 1"],"hardScienceClasses":["Introduction to Chemistry"],"hardSocialClasses":["world geography"],"hardLAClasses":["language arts 9 honors"],"recommendedClassesConsider":[],"stemChoicesBasedOnRigor":[]}
-// As you can see, it is not a string at all, but a bunch of arrays. How can I parse it into arrays from that?
-
-// this line:
-//   const parsedData = JSON.parse(data);
-// gives error on data:
-// const data: string | string[] | undefined
-// Argument of type 'string | string[] | undefined' is not assignable to parameter of type 'string'.
-//   Type 'undefined' is not assignable to type 'string'.ts(2345)
-// because some arrays are empty, some are filled with more than one string, and some are just one string. The empty ones are treated as undefined, the one-length arrays are strings, and the string[] are arrays with length longer than one. How can I account for these?
-// That's not what I want. If the type is of an array, i want to add all the array values to my array on the page, and if it is is a string, just add it to the array, and if it is null, add an empty string to the array, for all arrays i have.
-// Also, data is separated into many arrays. I want Each array to be given to my array, like all the contents of easyMathClasses should be transferred to the array easyMath, in here:
-// let easyMath: string[] = []
-//     let easyScience: string[] = []
-//     let easySocial: string[] = []
-//     let easyLA: string[] = []
-
-//     let recommendedMath: string[] = []
-//     let recommendedScience: string[] = []
-//     let recommendedSocial: string[] = []
-//     let recommendedLA: string[] = []
-
-//     let hardMath: string[] = []
-//     let hardScience: string[] = []
-//     let hardSocial: string[] = []
-//     let hardLA: string[] = []
-
-//     let recommendedConsider: string[] = []
-//     let stemBasedOnRigor: string[] = []

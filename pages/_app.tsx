@@ -6,6 +6,7 @@ import { AuthContextProvider } from '../context/AuthContext'
 import { useRouter } from 'next/router'
 import ProtectedRoute from '../components/ProtectedRoute'
 import { useEffect } from 'react'
+import Footer from '../components/footer';
 
 const noAuthRequired = ['/', '/about', '/login', '/signup', '/faq', '/catalog', '/PasswordResetForm'] //THIS IS WHERE YOU WHITELIST PAGES
 function MyApp({ Component, pageProps }: AppProps) {
@@ -28,6 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </ProtectedRoute>
       )}
+      <Footer />
     </AuthContextProvider>
   )
 }

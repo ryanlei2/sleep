@@ -6,7 +6,10 @@ import SurveyComp from '../components/SurveyComp'
 
 export default function Survey() {
   return (
-    <Container className="mx-auto">
+    <Container className="mx-auto" style={{
+      marginBottom:'480px',
+      marginTop: '200px'
+    }}>
       <SurveyComp />
       {/* link to results template to paste into survey complete in SurveyJS */}
       {/* once complete add completed course creation list to dropdown menu with name, basically a history of courses per user id */}

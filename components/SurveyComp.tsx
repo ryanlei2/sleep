@@ -595,7 +595,6 @@ onValue(coursesRef, (snapshot) => {
           json={surveyJSON}
           onComplete={handleSurveyComplete}
           /> 
-            {/* <button onClick={handleClick}>Results</button> */}
         </div> 
       )}
     </div>
