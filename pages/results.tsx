@@ -6,18 +6,52 @@ import { useRouter } from 'next/router';
 import { ArrayChanges } from 'survey-react';
 import { arrayBuffer } from 'stream/consumers';
 
-    
-
 const Results = () => {
-  const router = useRouter()
+const router = useRouter()
 
 let recommendedConsider: string[] = []
 let stemBasedOnRigor: string[] = []
   const data = router.query
+  // const dataObj = router.query.data
+  const dataObj = router.query.data// ? JSON.parse(router.query.data) : {};  
   console.log(router.query.data);
-  let easyMath = data.easyMathClasses;
-  console.log(router.query.data);
-    
+  console.log(JSON.stringify(data));
+  const array = JSON.stringify(data)
+  const easyClasses = [
+    convertArrayToObject(dataObj.easyMathClasses),
+    convertArrayToObject(dataObj.easySocialClasses),
+    convertArrayToObject(dataObj.easyScienceClasses),
+    convertArrayToObject(dataObj.easyLAClasses)
+  ];
+  const recommendedClasses = [
+    convertArrayToObject(dataObj.recommendedMathClasses),
+    convertArrayToObject(dataObj.recommendedSocialClasses),
+    convertArrayToObject(dataObj.recommendedScienceClasses),
+    convertArrayToObject(dataObj.recommendedLAClasses)
+  ];
+  const hardClasses = [
+    convertArrayToObject(dataObj.hardMathClasses),
+    convertArrayToObject(dataObj.hardSocialClasses),
+    convertArrayToObject(dataObj.hardScienceClasses),
+    convertArrayToObject(dataObj.hardLAClasses)
+  ];
+  const otherClasses = [
+    convertArrayToObject(dataObj.recommendedClassesConsider),
+    convertArrayToObject(dataObj.stemChoicesBasedOnRigor)
+  ];
+  
+  const result = [easyClasses, recommendedClasses, hardClasses, otherClasses];
+  console.log(result);
+  
+  function convertArrayToObject(arr: any[]) {
+    if (Array.isArray(arr)) {
+      return arr.map(name => ({ name }));
+    } else {
+      return [{ name: arr }];
+    }
+  }
+  
+      
   let easyScience: string[] = []
   let easySocial: string[] = []
   let easyLA: string[] = []
