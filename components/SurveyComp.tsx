@@ -260,49 +260,6 @@ function SurveyComp() {
   let recommendedClassesConsider: string[] = []
   let stemChoicesBasedOnRigor: string[] = []
 
-  const handleClick = () => {
-    // router.push({
-    //   pathname: '../pages/results',
-    //   query: {
-    //     data: JSON.stringify({
-    //       easyMathClasses,
-    //       easySocialClasses,
-    //       easyScienceClasses,
-    //       easyLAClasses,
-    //       recommendedMathClasses,
-    //       recommendedScienceClasses,
-    //       recommendedSocialClasses,
-    //       recommendedLAClasses,
-    //       hardMathClasses,
-    //       hardScienceClasses,
-    //       hardSocialClasses,
-    //       hardLAClasses,
-    //       recommendedClassesConsider,
-    //       stemChoicesBasedOnRigor,
-    //     }),
-    //   },
-    // })
-    router.push({
-      pathname: '../pages/results',
-      query: {
-        easyMathClasses: JSON.stringify(easyMathClasses),
-        easySocialClasses: JSON.stringify(easySocialClasses),
-        easyScienceClasses: JSON.stringify(easyScienceClasses),
-        easyLAClasses: JSON.stringify(easyLAClasses),
-        recommendedMathClasses: JSON.stringify(recommendedMathClasses),
-        recommendedScienceClasses: JSON.stringify(recommendedScienceClasses),
-        recommendedSocialClasses: JSON.stringify(recommendedSocialClasses),
-        recommendedLAClasses: JSON.stringify(recommendedLAClasses),
-        hardMathClasses: JSON.stringify(hardMathClasses),
-        hardScienceClasses: JSON.stringify(hardScienceClasses),
-        hardSocialClasses: JSON.stringify(hardSocialClasses),
-        hardLAClasses: JSON.stringify(hardLAClasses),
-        recommendedClassesConsider: JSON.stringify(recommendedClassesConsider),
-        stemChoicesBasedOnRigor: JSON.stringify(stemChoicesBasedOnRigor),
-      },
-    });
-  }
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       StylesManager.applyTheme("defaultV2");
@@ -326,13 +283,16 @@ function SurveyComp() {
     analyzeSurveyData(dataArray)
     saveSurveyData(dataArray); // Save survey data to Firestore
 
-    router.push({
-      pathname: '/results',
-      query: {
-        data: JSON.stringify({easyMathClasses,easySocialClasses,easyScienceClasses,easyLAClasses,recommendedMathClasses,recommendedScienceClasses,recommendedSocialClasses,recommendedLAClasses,hardMathClasses,hardScienceClasses,hardSocialClasses,hardLAClasses,recommendedClassesConsider,stemChoicesBasedOnRigor,
-        }),
-      },
-    })
+    setTimeout(() => {
+      router.push({
+        pathname: '/results',
+        query: {
+          data: JSON.stringify({easyMathClasses,easySocialClasses,easyScienceClasses,easyLAClasses,recommendedMathClasses,recommendedScienceClasses,recommendedSocialClasses,recommendedLAClasses,hardMathClasses,hardScienceClasses,hardSocialClasses,hardLAClasses,recommendedClassesConsider,stemChoicesBasedOnRigor,
+          }),
+        },
+      })
+    }, 5000);
+    
   };
     
   //look at data and select courses

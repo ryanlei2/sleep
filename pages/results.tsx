@@ -12,22 +12,18 @@ const router = useRouter()
 let recommendedConsider: string[] = []
 let stemBasedOnRigor: string[] = []
   const data = router.query
-  // const dataObj = router.query.data
-  const dataObj = router.query.data// ? JSON.parse(router.query.data) : {};  
+
+  const dataObj2:any = router.query.data
+  const dataObj = router.query.data ? JSON.parse(dataObj2) : {};  
   console.log(router.query.data);
   console.log(JSON.stringify(data));
   const array = JSON.stringify(data)
-  const easyClasses = [
+  //math social science la
+    const easyClasses = [
     convertArrayToObject(dataObj.easyMathClasses),
     convertArrayToObject(dataObj.easySocialClasses),
     convertArrayToObject(dataObj.easyScienceClasses),
     convertArrayToObject(dataObj.easyLAClasses)
-  ];
-  const recommendedClasses = [
-    convertArrayToObject(dataObj.recommendedMathClasses),
-    convertArrayToObject(dataObj.recommendedSocialClasses),
-    convertArrayToObject(dataObj.recommendedScienceClasses),
-    convertArrayToObject(dataObj.recommendedLAClasses)
   ];
   const hardClasses = [
     convertArrayToObject(dataObj.hardMathClasses),
@@ -35,13 +31,21 @@ let stemBasedOnRigor: string[] = []
     convertArrayToObject(dataObj.hardScienceClasses),
     convertArrayToObject(dataObj.hardLAClasses)
   ];
+  const recommendedClasses = [
+    convertArrayToObject(dataObj.recommendedMathClasses),
+    convertArrayToObject(dataObj.recommendedSocialClasses),
+    convertArrayToObject(dataObj.recommendedScienceClasses),
+    convertArrayToObject(dataObj.recommendedLAClasses)
+  ];
   const otherClasses = [
     convertArrayToObject(dataObj.recommendedClassesConsider),
     convertArrayToObject(dataObj.stemChoicesBasedOnRigor)
   ];
   
-  const result = [easyClasses, recommendedClasses, hardClasses, otherClasses];
+  const result = [easyClasses, hardClasses, recommendedClasses, otherClasses];
   console.log(result);
+
+  
   
   function convertArrayToObject(arr: any[]) {
     if (Array.isArray(arr)) {
