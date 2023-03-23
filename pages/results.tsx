@@ -165,7 +165,7 @@ const router = useRouter()
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId='feedbackForm'>
               <Form.Control as='textarea' rows={3} value={feedback} onChange={handleFeedbackChange}/>
-              <Button variant='primary' type='submit' style={{ marginTop: '3rem' }}>
+              <Button variant='primary' type='submit' style={{ marginTop: '3rem', marginBottom: '100px' }}>
                 Submit Feedback
               </Button>
             </Form.Group>

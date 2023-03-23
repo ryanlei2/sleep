@@ -7,7 +7,7 @@ const Faq = () => {  return (
       style={{
         textAlign:'center',
         fontSize: '5rem',
-        marginTop:'30px'
+        marginTop:'150px'
       }}
       >Frequently Asked Questions</h1>
       <div style={{

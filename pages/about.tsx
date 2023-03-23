@@ -5,7 +5,7 @@ const About = () => {
     <div className="display-1"
     style={{
       textAlign: 'center',
-      marginTop: '100px'
+      marginTop: '200px'
     }}
     >
       For Students, By Students
