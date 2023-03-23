@@ -30,7 +30,8 @@ const Signup = () => {
         width: '40%',
         margin: 'auto',
         fontSize: '2vmax',
-        marginTop: '60px'
+        marginTop: '150px',
+        marginBottom: '400px'
       }}
     >
       <h1 className="text-center my-3 display-3">Signup</h1>
