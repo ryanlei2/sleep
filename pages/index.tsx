@@ -110,9 +110,7 @@ const Home: NextPage = () => {
                 fontSize:'2.7rem'
               }}>
                 Take a look at our course catalog!
-              </Card.Text>
-              console.log();
-              
+              </Card.Text>              
               <Link href="https://resources.finalsite.net/images/v1677715498/rsdedu/livi36kif2azcpamtafa/RSDHighSchoolCatalog2023-2024Digital.pdf">
                   <Button style={{height: '50px', width: '100px', fontSize: '1.3rem'}} variant="primary">Click Here</Button>
                 </Link>
