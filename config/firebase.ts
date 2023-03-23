@@ -108,7 +108,8 @@ export function saveUserFeedback(feedback: string[]) {
   addDoc(userFeedbackRef, {
     userId: userId,
     userEmail: email,
-    date: new Date().toLocaleDateString('en-GB')
+    date: new Date().toLocaleDateString('en-GB'),
+    data: feedback
   })
     .then(() => {
       console.log("User feedback saved successfully to Cloud Firestore!");

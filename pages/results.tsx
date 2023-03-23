@@ -86,6 +86,7 @@ const router = useRouter()
   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const button = event.target as HTMLButtonElement;
     setButtonClicked(button.name);
+    console.log(buttonClicked);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -94,6 +95,7 @@ const router = useRouter()
     saveUserFeedback(feedbackData);
     setFeedback('');
     setButtonClicked('');
+    console.log(feedbackData);
   };
 
   return (

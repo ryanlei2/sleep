@@ -7,9 +7,7 @@ interface FeedbackData {
   id: string;
   data: {
     data: string[];
-    timestamp: {
-      seconds: number;
-    };
+    date: string;
     userId: string;
     userEmail: string;
   };
@@ -73,10 +71,10 @@ function AdminDashboard() {
           >
             <p>Email: {feedbackItem.data.userEmail}</p>
             <p>UserID: {feedbackItem.data.userId}</p>
-            <p>Date: {new Date(feedbackItem.data.timestamp.seconds * 1000).toLocaleDateString()}</p>
+            <p>Date: {feedbackItem.data.date}</p>
             <ul>
-              {feedbackItem.data.data.map((item, index) => (
-                <li key={index}>{item}</li>
+              {feedbackItem.data.data.map((item) => (
+                <li>{item}</li>
               ))}
             </ul>
             <Button onClick={() => handleDelete(feedbackItem.id)}>Delete</Button>
