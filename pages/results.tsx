@@ -1,17 +1,89 @@
-import React, { useState } from 'react';
-import { Container, Table, Button, Form } from 'react-bootstrap';
+import React, { useRef, useState } from 'react';
+import { Container, Table, Button, Form, Row } from 'react-bootstrap';
 import { saveUserFeedback } from '../config/firebase';
 import { useLocation } from 'react-router-dom';
 import { useRouter } from 'next/router';
 import { ArrayChanges } from 'survey-react';
 import { arrayBuffer } from 'stream/consumers';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+
+
+import { renderToString } from 'react-dom/server';
+
 
 const Results = () => {
-const router = useRouter()
+  const router = useRouter()
+  pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    // Set up the styles for the table
+  
+  const [pdfURL, setPdfURL] = useState<string | null>(null);
+  
+  const generatePDF = async () => {
+// Define the table styles
+const tableStyle = {
+  fontSize: 8,
+  margin: [0, 10, 0, 10],
+  alignment: 'left',
+};
 
+// Define the document content
+const docDefinition = {
+  content: [
+    {
+      table: {
+        widths: ['*', '*', '*', '*'],
+        body: [
+          ['Math:', '', '', ''],
+          ['Easy -', easyMath.join(', '), '', ''],
+          ['Hard -', hardMath.join(', '), '', ''],
+          ['Recommend -', recommendedMath.join(', '), '', ''],
+          ['Science:', '', '', ''],
+          ['Easy -', easyScience.join(', '), '', ''],
+          ['Hard -', hardScience.join(', '), '', ''],
+          ['Recommend -', recommendedScience.join(', '), '', ''],
+          ['Social:', '', '', ''],
+          ['Easy -', easySocial.join(', '), '', ''],
+          ['Hard -', hardSocial.join(', '), '', ''],
+          ['Recommend -', recommendedSocial.join(', '), '', ''],
+          ['LA:', '', '', ''],
+          ['Easy -', easyLA.join(', '), '', ''],
+          ['Hard -', hardLA.join(', '), '', ''],
+          ['Recommend -', recommendedLA.join(', '), '', ''],
+          ['STEM:', stemBasedOnRigor.join(', '), '', ''],
+          ['Consider:', recommendedConsider.join(', '), '', ''],
+        ],
+        layout: {
+          hLineWidth: () => 0.5,
+          vLineWidth: () => 0.5,
+          hLineColor: () => '#000000',
+          vLineColor: () => '#000000',
+          paddingLeft: () => 5,
+          paddingRight: () => 5,
+          paddingTop: () => 5,
+          paddingBottom: () => 5,
+        },
+      },
+      style: {
+        fontSize: 10,
+      },
+    },
+  ],
+};
+
+// Generate the PDF document
+const pdfDocument = pdfMake.createPdf(docDefinition);
+pdfDocument.download('document.pdf');
+};
+
+// Call the generatePDF function to initiate the PDF generation
+const handleDownloadPDF = () => {
+  generatePDF();
+};
 
   const data = router.query
-
+  
+  // Function to download the PDF document
   const dataObj2:any = router.query.data
   const dataObj = router.query.data ? JSON.parse(dataObj2) : {};  
   console.log(router.query.data);
@@ -63,8 +135,6 @@ const router = useRouter()
   const result = [easyClasses, hardClasses, recommendedClasses, otherClasses];
   console.log(result);
 
-  
-  
   function convertArrayToObject(arr: any[]) {
     if (Array.isArray(arr)) {
       return arr.map(name => ({ name }));
@@ -72,10 +142,6 @@ const router = useRouter()
       return [{ name: arr }];
     }
   }
-  
-      
-  
-
   const [feedback, setFeedback] = useState('');
   const [buttonClicked, setButtonClicked] = useState('');
 
@@ -172,6 +238,20 @@ const router = useRouter()
               </Button>
             </Form.Group>
           </Form>
+        </div>
+        <div>
+          {/* Existing JSX code */}
+          <Button variant="primary" onClick={handleDownloadPDF}>
+            Download PDF
+          </Button>
+          {pdfURL && (
+            <a href={pdfURL} download="table_data.pdf">
+              Click here to download the PDF
+            </a>
+          )}
+          {pdfURL && (
+            <embed src={pdfURL} type="application/pdf" width="100%" height="600px" />
+          )}
         </div>
       </Container>
     </div>

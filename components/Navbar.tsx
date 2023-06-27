@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Nav, Navbar } from 'react-bootstrap'
 import Link from 'next/link'
 import { useAuth } from '../context/AuthContext'
@@ -7,9 +7,27 @@ import Image from 'next/image';
 import favicon from '../assets/favicon.ico'
 import styles from '../styles/navbar.module.css'
 
+import { checkAdmin } from '../config/firebase'
+import AdminDashboard from "../components/AdminDashboard"
+import StudentDashboard from '../components/StudentDashboard'
+
+
 const NavbarComp = () => {
   const { user, logout } = useAuth()
   const router = useRouter()
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  
+  useEffect(() => {
+    async function fetchAdminStatus() {
+      const isAdmin = await checkAdmin(user?.uid); // Use optional chaining to access uid property
+      setIsAdmin(isAdmin);
+    }
+  
+    if (user && user.uid) {
+      fetchAdminStatus();
+    }
+  }, [user?.uid]);
 
   return (
       <Navbar expand="xl" sticky='top' className={styles.navBar}
@@ -37,7 +55,10 @@ const NavbarComp = () => {
           <Nav
           >
             {user ? (
-              <Nav.Item className="ms-auto display-2">
+              <div style={{
+                display: 'flex',
+              }}>
+              <Nav.Item className="ms-auto display-2" style={{marginRight: '20px'}}>
                 <Nav.Link className='' 
                   onClick={() => {
                     router.push('/dashboard')
@@ -46,10 +67,32 @@ const NavbarComp = () => {
                   dashboard
                 </Nav.Link>
               </Nav.Item>
+              </div>
+              
             ) : (
               <>
               </>
             )}
+            
+            {/* {!isAdmin && user ? (
+              <div style={{
+                display: 'flex',
+              }}>
+              <Nav.Item className="ms-auto display-2" style={{marginRight: '20px'}}>
+                <Nav.Link className='' 
+                  onClick={() => {
+                    router.push('/resultsPage')
+                  }}
+                >
+                  results
+                </Nav.Link>
+              </Nav.Item>
+              </div>
+              
+            ) : (
+              <>
+              </>
+            )} */}
           </Nav>
         <Nav className='container-fluid'>
             {user ? (

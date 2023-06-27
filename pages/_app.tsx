@@ -8,7 +8,7 @@ import ProtectedRoute from '../components/ProtectedRoute'
 import { useEffect } from 'react'
 import Footer from '../components/footer';
 
-const noAuthRequired = ['/', '/about', '/login', '/signup', '/faq', '/catalog', '/PasswordResetForm'] //THIS IS WHERE YOU WHITELIST PAGES
+const noAuthRequired = ['/', '/about', '/login', '/signup', '/faq', '/catalog', '/PasswordResetForm', '/resultsPage'] //THIS IS WHERE YOU WHITELIST PAGES
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
   useEffect(() => {
