@@ -39,7 +39,7 @@ const NavbarComp = () => {
         <Link href="/"  passHref legacyBehavior>
           <Nav.Link className={styles.brandIconHover}>
             <Image 
-            className='shadow-lg'
+            className=''
             style={{
               marginLeft: '30px',
               marginRight: '30px',
@@ -58,7 +58,7 @@ const NavbarComp = () => {
               <div style={{
                 display: 'flex',
               }}>
-              <Nav.Item className="ms-auto display-2" style={{marginRight: '20px'}}>
+              <Nav.Item className="ms-auto display-3" style={{marginRight: '20px'}}>
                 <Nav.Link className='' 
                   onClick={() => {
                     router.push('/dashboard')
@@ -67,8 +67,25 @@ const NavbarComp = () => {
                   dashboard
                 </Nav.Link>
               </Nav.Item>
+              <Nav.Item className="ms-auto display-3" style={{marginRight: '20px'}}>
+                <Nav.Link className='' 
+                  onClick={() => {
+                    router.push('/survey')
+                  }}
+                >
+                  time
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item className="ms-auto display-3" style={{marginRight: '20px'}}>
+                <Nav.Link className='' 
+                  onClick={() => {
+                    router.push('/analytics')
+                  }}
+                >
+                  analytics
+                </Nav.Link>
+              </Nav.Item>
               </div>
-              
             ) : (
               <>
               </>
@@ -108,7 +125,7 @@ const NavbarComp = () => {
               </>
             )}
         </Nav>
-        <Nav className='container-fluid'>
+        {/* <Nav className='container-fluid'>
             {user ? (
               <>
               </>//if not logged in show btn
@@ -122,7 +139,7 @@ const NavbarComp = () => {
                 </Nav.Item>
               </>
             )}
-        </Nav>
+        </Nav> */}
         <Nav className='container-fluid'>
           {user ? (
             <Nav.Item className="ms-auto display-2">

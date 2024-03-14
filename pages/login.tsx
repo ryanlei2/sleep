@@ -83,7 +83,7 @@ const Login = () => {
         </Button>
       </Form>
       <hr></hr>
-      <p>New to Coursee? <Link href='/signup'>Sign Up</Link></p>
+      <p>New to Snooz? <Link href='/signup'>Sign Up</Link></p>
       <Button href='PasswordResetForm'
       style={{ height: '40px', fontSize:'20px'}}
       >Forgot Password?</Button>

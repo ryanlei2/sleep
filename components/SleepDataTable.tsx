@@ -1,44 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table } from 'react-bootstrap';
 import { auth, fetchUserData } from '../config/firebase';
-import { DocumentData, Timestamp } from 'firebase/firestore'; // Import Timestamp
-import moment from 'moment'; // Import moment for formatting
+import { DocumentData, Timestamp } from 'firebase/firestore';
+import moment from 'moment';
 
 interface UserData {
   wakingTime: string;
   sleepingTime: string;
-  quality: string;
-  timestamp: Timestamp; // Change type to Timestamp
+  timestamp: Timestamp;
 }
 
 const formatDate = (timestamp: any) => {
-  const date = timestamp.toDate(); // Convert Firebase Timestamp to JavaScript Date
-  return moment(date).format('MMMM D, YYYY'); // Format date using moment.js
-};
-
-const convertTo24HourFormat = (time: string) => {
-  let [hours, minutes] = time.split(':');
-  const isPM = time.toLowerCase().includes('pm');
-  if (isPM && parseInt(hours, 10) !== 12) {
-    hours = String(parseInt(hours, 10) + 12);
-  } else if (!isPM && parseInt(hours, 10) === 12) {
-    hours = '00';
-  }
-  return `${hours}:${minutes}`;
+  const date = timestamp.toDate();
+  return moment(date).format('MMMM D, YYYY');
 };
 
 const calculateAverageSleepHours = (userData: UserData[]) => {
   let totalSleepHours = 0;
   userData.forEach((data) => {
-    const wakeUpTime = moment(convertTo24HourFormat(data.wakingTime), 'HH:mm');
-    const sleepTime = moment(convertTo24HourFormat(data.sleepingTime), 'HH:mm');
-    const sleepHours = sleepTime.diff(wakeUpTime, 'hours', true); // Calculate the difference in hours
+    const wakeUpTime = moment(data.wakingTime, 'HH:mm');
+    const sleepTime = moment(data.sleepingTime, 'HH:mm');
+    const sleepHours = sleepTime.diff(wakeUpTime, 'hours', true);
     totalSleepHours += sleepHours;
   });
-  return totalSleepHours / userData.length; // Return the average
+  return totalSleepHours / userData.length;
 };
 
-const StudentDashboard = () => {
+const SleepDataTable = () => {
   const [userData, setUserData] = useState<UserData[]>([]);
   const [averageSleepHours, setAverageSleepHours] = useState<number | null>(null);
 
@@ -51,7 +39,6 @@ const StudentDashboard = () => {
             wakingTime: doc.wakingTime,
             sleepingTime: doc.sleepingTime,
             timestamp: doc.timestamp, // Keep it as Timestamp
-            quality: doc.quality
           }));
           setUserData(userDataArray);
           const averageHours = calculateAverageSleepHours(userDataArray);
@@ -69,7 +56,6 @@ const StudentDashboard = () => {
             <th>Date</th>
             <th>Wake Up Time</th>
             <th>Sleep Time</th>
-            <th>Quality</th>
           </tr>
         </thead>
         <tbody>
@@ -78,7 +64,6 @@ const StudentDashboard = () => {
               <td>{formatDate(data.timestamp)}</td>
               <td>{data.wakingTime}</td>
               <td>{data.sleepingTime}</td>
-              <td>{data.quality}</td>
             </tr>
           ))}
         </tbody>
@@ -92,4 +77,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default SleepDataTable;

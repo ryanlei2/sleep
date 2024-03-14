@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { collection, deleteDoc, doc, getDocs, onSnapshot } from 'firebase/firestore';
-import { db } from '../config/firebase';
-import { Button, ListGroup } from 'react-bootstrap';
-// This code defines an interface FeedbackData that represents the structure of each feedback item in the array. It also uses the as keyword to cast the data returned from Firebase to the FeedbackData interface to prevent type errors.
+import { auth, db } from '../config/firebase';
+import { Button, ListGroup, Table } from 'react-bootstrap';
+
 interface FeedbackData {
   id: string;
   data: {
-    data: string[];
-    date: string;
+    wakingTime: string;
+    sleepingTime: string;
+    timestamp: string;
     userId: string;
-    userEmail: string;
   };
 }
 
@@ -17,18 +17,30 @@ function AdminDashboard() {
   const [feedbackData, setFeedbackData] = useState<FeedbackData[]>([]);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'userFeedback'), (snapshot) => {
+    const unsubscribe = onSnapshot(collection(db, 'userData'), (snapshot) => {
       const feedbackData: FeedbackData[] = [];
       snapshot.forEach((doc) => {
-        feedbackData.push({ id: doc.id, data: doc.data() } as FeedbackData);
+        const data = doc.data();
+        const feedbackItem: FeedbackData = {
+          id: doc.id,
+          data: {
+            wakingTime: data.wakingTime,
+            sleepingTime: data.sleepingTime,
+            timestamp: data.timestamp,
+            userId: data.userId
+          }
+        };
+        feedbackData.push(feedbackItem);
       });
       setFeedbackData(feedbackData);
     });
-
+  
     return () => unsubscribe();
   }, []);
   
-  //handle the deletetion of data
+
+  
+  
   const handleDelete = async (id: string) => {
     try {
       await deleteDoc(doc(db, 'userFeedback', id));
@@ -37,51 +49,41 @@ function AdminDashboard() {
       console.error('Error deleting document:', error);
     }
   }
-  // In the return statement, it maps over the feedbackData array and renders a list item for each feedback item. The key prop is set to the id of each item. The feedbackItem.data object is then accessed to display the relevant information in the UI.
+
   return (
     <div
-    style={{
-      fontSize:'2rem',
-      marginLeft:'90px',
-      marginTop:'50px'
-    }}
+      style={{
+        fontSize: '2rem',
+        marginLeft: '90px',
+        marginTop: '50px'
+      }}
     >
-      <h1 className='display-1'
-      style={{
-        fontWeight:'bolder'
-      }}
-      >Admin Dashboard</h1>
-      <h3 className='display-2'
-      style={{
-        marginTop:'30px',
-        marginBottom:'30px'
-      }}
-      >User Feedback</h3>
+      <h1 className='display-1' style={{ fontWeight: 'bolder' }}>Admin Dashboard</h1>
+      <h3 className='display-2' style={{ marginTop: '30px', marginBottom: '30px' }}>Child Data</h3>
+      
+      {/* Iterate over feedbackData array and render table for each user */}
       <ul>
-        {feedbackData.map((feedbackItem) => (
-          <li
-            key={feedbackItem.id}
-            style={{
-              border: '4px solid gray',
-              boxShadow: '10px 10px 8px #888888',
-              padding: '10px',
-              listStyleType: 'none',
-              marginBottom: '40px'
-            }}
-          >
-            <p>Email: {feedbackItem.data.userEmail}</p>
-            <p>UserID: {feedbackItem.data.userId}</p>
-            <p>Date: {feedbackItem.data.date}</p>
-            <ul>
-              {feedbackItem.data.data.map((item) => (
-                <li>{item}</li>
-              ))}
-            </ul>
-            <Button onClick={() => handleDelete(feedbackItem.id)}>Delete</Button>
-            <br></br><br></br>
-          </li>
-        ))}
-      </ul>
+  {feedbackData.map((feedbackItem) => (
+    <li
+      key={feedbackItem.id}
+      style={{
+        border: '4px solid gray',
+        boxShadow: '10px 10px 8px #888888',
+        padding: '10px',
+        listStyleType: 'none',
+        marginBottom: '40px'
+      }}
+    >
+      <p>UserID: {feedbackItem.data.userId}</p>
+      <p>Date: {new Date(feedbackItem.data.timestamp.seconds * 1000).toLocaleString()}</p>
+      <p>Waking Time: {feedbackItem.data.wakingTime}</p>
+      <p>Sleeping Time: {feedbackItem.data.sleepingTime}</p>
+      <Button onClick={() => handleDelete(feedbackItem.id)}>Delete</Button>
+      <br></br><br></br>
+    </li>
+  ))}
+</ul>
+
     </div>
   );
 }

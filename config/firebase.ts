@@ -3,6 +3,7 @@ import { getFirestore, collection, addDoc, serverTimestamp, CollectionReference,
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, get, child, equalTo, orderByValue } from 'firebase/database';
 import { Auth, sendPasswordResetEmail as firebaseSendPasswordResetEmail } from 'firebase/auth';
+import {query, where, getDocs } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -23,6 +24,7 @@ export const db = getFirestore(app);
 export const userSelectionRef = collection(db, "userSelection");
 export const userFeedbackRef = collection(db, "userFeedback");
 export const userResultsRef = collection(db, "userResults");
+export const userDataRef = collection(db, "userData");
 
 // Realtime Database reference from app
 export const rtdb = getDatabase(app);
@@ -118,3 +120,14 @@ export function saveUserFeedback(feedback: string[]) {
       console.error("Error saving user feedback: ", error);
     });
 }
+export const fetchUserData = async (userId: string) => {
+  try {
+    const q = query(collection(db, "userData"), where("userId", "==", userId));
+    const querySnapshot = await getDocs(q);
+    const userData = querySnapshot.docs.map((doc) => doc.data());
+    return userData;
+  } catch (error) {
+    console.error("Error fetching user data: ", error);
+    return [];
+  }
+};

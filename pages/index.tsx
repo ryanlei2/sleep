@@ -34,8 +34,8 @@ const Home: NextPage = () => {
             <Image src={banner} alt='banner' style={{ height: "100%", width: "100vw", objectFit:'cover'}} />
             <div className={styles.bannerText} style={{position: "absolute", top: 70, left: 0, height: "100%", width: "100%", display: "flex" , alignItems: "center", justifyContent: "center"}}>
               <h1 style={{ fontSize: "0.7em" }}>
-                <b style={{ fontSize: "5.5em" }}>Let&apos;s Plan Together</b>
-                <p style={{ fontSize: "3.5em" }}>We&apos;re on a mission to help every student choose the right path.</p>
+                <b style={{ fontSize: "5.5em" }}>Let&apos;s Rest</b>
+                <p style={{ fontSize: "3.5em" }}>We&apos;re on a mission to help every person choose the right schedule.</p>
                 <Link href={"/survey"}
                 legacyBehavior>
                   <a 
@@ -68,54 +68,12 @@ const Home: NextPage = () => {
           fontSize: '70px',
           fontWeight: 'normal'
         }}
-        >Unsure about your class selection?</h2>
+        ><strong>Snooz: </strong>Unsure about your Sleep?</h2>
         <Row style={{
           justifyContent:'center',
+          fontSize: '3rem'
         }}>
-          <Card className={`${styles.card} ${isHovered ? styles.cardHover : ''}`} 
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
-                border="success" style={{ width: '40rem', marginRight: '100px', boxShadow: "20px 20px 0.2px #9E9E9E" }}>
-            <Card.Img variant="top" src='https://cdn.discordapp.com/attachments/1046981658617860186/1087508397890478272/faq4.png' style={{marginBottom: '50px', marginTop: '40px'}}/>
-            <Card.Body>
-              <Card.Title className='display-6'
-              style={{
-                fontWeight:'bold',
-                fontSize: '70px'
-              }}
-              >FAQ</Card.Title>
-              <Card.Text style={{
-                fontSize:'2.7rem'
-              }}>
-                Have a question you need answered?
-              </Card.Text>
-                <Link href="/faq">
-                  <Button style={{height: '50px', width: '100px', fontSize: '1.3rem', marginBottom:'40px'}} variant="primary">Click Here</Button>
-                </Link>
-            </Card.Body>
-          </Card>
-          <Card className={`${styles.card} ${isHovered ? styles.cardHover : ''}`} 
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)} 
-                border="success" style={{ width: '40rem', marginLeft:'100px', boxShadow: "20px 20px 0.2px #9E9E9E" }}>
-            <Card.Img style={{marginBottom: '50px', marginTop: '40px'}} variant="top" src="https://cdn.discordapp.com/attachments/1046981658617860186/1087514783252762654/catalog2.png" />
-            <Card.Body>
-              <Card.Title className='display-6'
-              style={{
-                fontWeight:'bold',
-                fontSize: '70px'
-              }}
-              >Catalog</Card.Title>
-              <Card.Text style={{
-                fontSize:'2.7rem'
-              }}>
-                Take a look at our course catalog!
-              </Card.Text>              
-              <Link href="https://resources.finalsite.net/images/v1677715498/rsdedu/livi36kif2azcpamtafa/RSDHighSchoolCatalog2023-2024Digital.pdf">
-                  <Button style={{height: '50px', width: '100px', fontSize: '1.3rem'}} variant="primary">Click Here</Button>
-                </Link>
-            </Card.Body>
-          </Card>
+          Find out your hours!
         </Row>
       </div>
       <div
@@ -142,9 +100,9 @@ const Home: NextPage = () => {
               marginTop: '100px',
               marginBottom:'20px'
             }}
-            >Why Coursee?
+            >Why Sleep?
             </h1>
-              Coursee is a streamlined and free way of choosing your courses without any external guidance. <br
+                Sleep is single-handedly the most effective way to contribute to our society.<br
               style={{
                 marginBottom:'30px'
               }}
