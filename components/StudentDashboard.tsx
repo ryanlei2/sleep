@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Table } from 'react-bootstrap';
-import { auth, fetchUserData } from '../config/firebase';
+import { auth, fetchUserData, saveAverageTimes } from '../config/firebase';
 import { DocumentData, Timestamp } from 'firebase/firestore'; // Import Timestamp
 import moment from 'moment'; // Import moment for formatting
 
@@ -16,27 +16,68 @@ const formatDate = (timestamp: any) => {
   return moment(date).format('MMMM D, YYYY'); // Format date using moment.js
 };
 
-const convertTo24HourFormat = (time: string) => {
+
+// Function to parse time string and convert to 24-hour format
+const parseTimeTo24HourFormat = (time: string) => {
   let [hours, minutes] = time.split(':');
-  const isPM = time.toLowerCase().includes('pm');
-  if (isPM && parseInt(hours, 10) !== 12) {
-    hours = String(parseInt(hours, 10) + 12);
-  } else if (!isPM && parseInt(hours, 10) === 12) {
-    hours = '00';
+  let hour = parseInt(hours, 10);
+  
+  if (time.toLowerCase().includes('am') && hour !== 12) {
+    hour += 12;
+  } else if (time.toLowerCase().includes('pm') && hour === 12) {
+    hour = 0;
   }
-  return `${hours}:${minutes}`;
+
+  const decimalMinutes = minutes ? parseInt(minutes, 10) / 60 : 0;
+  return hour + decimalMinutes;
 };
 
+// Function to calculate the average sleeping hours
 const calculateAverageSleepHours = (userData: UserData[]) => {
   let totalSleepHours = 0;
   userData.forEach((data) => {
-    const wakeUpTime = moment(convertTo24HourFormat(data.wakingTime), 'HH:mm');
-    const sleepTime = moment(convertTo24HourFormat(data.sleepingTime), 'HH:mm');
-    const sleepHours = sleepTime.diff(wakeUpTime, 'hours', true); // Calculate the difference in hours
+    const wakeUpTime = parseTimeTo24HourFormat(data.wakingTime);
+    const sleepTime = parseTimeTo24HourFormat(data.sleepingTime);
+    const sleepHours = sleepTime - wakeUpTime; // Calculate the difference in hours
     totalSleepHours += sleepHours;
   });
-  return totalSleepHours / userData.length; // Return the average
+  return totalSleepHours / userData.length *-1; // Return the average
 };
+
+// Function to calculate the average wake-up time
+const calculateAverageWakeUpTime = (userData: UserData[]) => {
+  let totalWakeUpTime = 0;
+  let count = 0;
+
+  userData.forEach((data) => {
+    const wakeUpTime = parseTimeTo24HourFormat(data.wakingTime);
+    totalWakeUpTime += wakeUpTime;
+    count++;
+  });
+
+  // Calculate the average wake-up time
+  const averageWakeUpTime = totalWakeUpTime / count;
+  return averageWakeUpTime;
+};
+
+// Function to calculate the average sleep time
+const calculateAverageSleepTime = (userData: UserData[]) => {
+  let totalSleepTime = 0;
+  let count = 0;
+
+  userData.forEach((data) => {
+    const sleepTime = parseTimeTo24HourFormat(data.sleepingTime);
+    totalSleepTime += sleepTime;
+    count++;
+  });
+
+  // Calculate the average sleep time
+  const averageSleepTime = totalSleepTime / count;
+  return averageSleepTime;
+};
+
+
+
 
 const StudentDashboard = () => {
   const [userData, setUserData] = useState<UserData[]>([]);
@@ -54,8 +95,12 @@ const StudentDashboard = () => {
             quality: doc.quality
           }));
           setUserData(userDataArray);
-          const averageHours = calculateAverageSleepHours(userDataArray);
-          setAverageSleepHours(averageHours);
+        const averageHours = calculateAverageSleepHours(userDataArray);
+        setAverageSleepHours(averageHours);
+        const averageWakeUp = calculateAverageWakeUpTime(userDataArray);
+        const averageSleep = calculateAverageSleepTime(userDataArray);
+        saveAverageTimes(userId, averageWakeUp.toFixed(2), averageSleep.toFixed(2));
+
         })
         .catch((error) => console.error('Error fetching user data:', error));
     }
@@ -84,10 +129,16 @@ const StudentDashboard = () => {
         </tbody>
       </Table>
       {averageSleepHours !== null && (
-        <div style={{ fontSize: '2rem', marginTop: '20px' }}>
-          Average Sleep Hours: {averageSleepHours.toFixed(2)} hours
-        </div>
-      )}
+    <div style={{ fontSize: '2rem', marginTop: '20px' }}>
+      Average Sleep Hours: {averageSleepHours.toFixed(2)} hours
+      <div>
+        Average Wake Up Time: {calculateAverageWakeUpTime(userData)-12} AM
+      </div>
+      <div>
+        Average Sleep Time: {calculateAverageSleepTime(userData)>12 ? calculateAverageSleepTime(userData)-12 :calculateAverageSleepTime(userData)} {calculateAverageSleepTime(userData)>12 ? 'AM' : 'PM'}
+      </div>
+    </div>
+  )}
     </Container>
   );
 };

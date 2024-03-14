@@ -43,7 +43,7 @@ function AdminDashboard() {
   
   const handleDelete = async (id: string) => {
     try {
-      await deleteDoc(doc(db, 'userFeedback', id));
+      await deleteDoc(doc(db, 'userData', id));
       setFeedbackData(prevState => prevState.filter(feedback => feedback.id !== id));
     } catch (error) {
       console.error('Error deleting document:', error);

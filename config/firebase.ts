@@ -25,6 +25,7 @@ export const userSelectionRef = collection(db, "userSelection");
 export const userFeedbackRef = collection(db, "userFeedback");
 export const userResultsRef = collection(db, "userResults");
 export const userDataRef = collection(db, "userData");
+export const userAverageTime = collection(db, "userAverageTime");
 
 // Realtime Database reference from app
 export const rtdb = getDatabase(app);
@@ -92,6 +93,31 @@ export function saveSurveyData(surveyData: { question: string; answer: any; }[])
       console.error("Error saving survey data: ", error);
     });
 }
+
+
+export function saveAverageTimes(userId: string, avgWakeUpTime: string, avgSleepTime: string) {
+  // Check if the userId is provided
+  if (!userId) {
+    console.error('User ID is required.');
+    return;
+  }
+
+  // Add document to the userAverageTime collection in Firestore with userId, average wake-up time, and average sleep time
+  addDoc(userAverageTime, {
+    userId: userId,
+    timestamp: serverTimestamp(),
+    avgWakeUpTime: avgWakeUpTime,
+    avgSleepTime: avgSleepTime,
+  })
+    .then(() => {
+      console.log("Average wake-up time and sleep time saved successfully to Cloud Firestore!");
+    })
+    .catch((error) => {
+      console.error("Error saving average times: ", error);
+    });
+}
+
+
 
 export function saveUserFeedback(feedback: string[]) {
   //take user id

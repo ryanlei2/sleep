@@ -27,7 +27,7 @@ const surveyJSON =
       "title": "I slept at (P.M./A.M.):",
       "choices": [
        {
-        "value": "9 PM",
+        "value": "9:00 PM",
         "text": "9:00"
        },
        {
@@ -35,7 +35,7 @@ const surveyJSON =
         "text": "9:30"
        },
        {
-        "value": "10 PM",
+        "value": "10:00 PM",
         "text": "10:00"
        },
        {
@@ -43,7 +43,7 @@ const surveyJSON =
         "text": "10:30"
        },
        {
-        "value": "11 PM",
+        "value": "11:00 PM",
         "text": "11:00"
        },
        {
@@ -51,7 +51,7 @@ const surveyJSON =
         "text": "11:30"
        },
        {
-        "value": "12 AM",
+        "value": "12:00 AM",
         "text": "12:00"
        },
        {
@@ -59,7 +59,7 @@ const surveyJSON =
         "text": "12:30"
        },
        {
-        "value": "1 AM",
+        "value": "1:00 AM",
         "text": "1:00"
        }
       ]
@@ -77,7 +77,7 @@ const surveyJSON =
       "title": "I woke up at (A.M.):",
       "choices": [
        {
-        "value": "5 AM",
+        "value": "5:00 AM",
         "text": "5:00"
        },
        {
@@ -93,7 +93,7 @@ const surveyJSON =
         "text": "5:45"
        },
        {
-        "value": "6 AM",
+        "value": "6:00 AM",
         "text": "6:00"
        },
        {
@@ -109,7 +109,7 @@ const surveyJSON =
         "text": "6:45"
        },
        {
-        "value": "7 AM",
+        "value": "7:00 AM",
         "text": "7:00"
        },
        {
@@ -125,7 +125,7 @@ const surveyJSON =
         "text": "7:45"
        },
        {
-        "value": "8 AM",
+        "value": "8:00 AM",
         "text": "8:00"
        }
       ]
