@@ -16,12 +16,11 @@ const formatDate = (timestamp: any) => {
   return moment(date).format('MMMM D, YYYY'); // Format date using moment.js
 };
 
-
 // Function to parse time string and convert to 24-hour format
 const parseTimeTo24HourFormat = (time: string) => {
   let [hours, minutes] = time.split(':');
   let hour = parseInt(hours, 10);
-  
+
   if (time.toLowerCase().includes('am') && hour !== 12) {
     hour += 12;
   } else if (time.toLowerCase().includes('pm') && hour === 12) {
@@ -41,8 +40,43 @@ const calculateAverageSleepHours = (userData: UserData[]) => {
     const sleepHours = sleepTime - wakeUpTime; // Calculate the difference in hours
     totalSleepHours += sleepHours;
   });
-  return totalSleepHours / userData.length *-1; // Return the average
+  return totalSleepHours / userData.length * -1; // Return the average
 };
+
+function convertMilitaryTimeToString(militaryTime: number) {
+  // Extract hours and minutes
+  let hours = Math.floor(militaryTime);
+  let minutes = (militaryTime - hours) * 60;
+
+  // If minutes is not an integer, round it to the nearest integer
+  minutes = Math.round(minutes);
+
+  // If minutes exceed 60, adjust hours and reset minutes
+  if (minutes >= 60) {
+    hours++;
+    minutes -= 60;
+  }
+
+  // Format the hours and minutes
+  let formattedHours = hours.toString().padStart(2, '0');
+  let formattedMinutes = minutes.toString().padStart(2, '0');
+
+  // Handle AM/PM format
+  let ampm = 'AM';
+  if (hours >= 12) {
+    if (hours > 12) {
+      formattedHours = (hours - 12).toString().padStart(2, '0');
+    }
+    ampm = 'PM';
+  } else if (hours === 0) {
+    formattedHours = '12';
+  }
+
+  // Format the time as "HH:MM AM/PM"
+  const formattedTime = `${formattedHours}:${formattedMinutes} ${ampm}`;
+
+  return formattedTime;
+}
 
 // Function to calculate the average wake-up time
 const calculateAverageWakeUpTime = (userData: UserData[]) => {
@@ -76,9 +110,6 @@ const calculateAverageSleepTime = (userData: UserData[]) => {
   return averageSleepTime;
 };
 
-
-
-
 const StudentDashboard = () => {
   const [userData, setUserData] = useState<UserData[]>([]);
   const [averageSleepHours, setAverageSleepHours] = useState<number | null>(null);
@@ -95,12 +126,11 @@ const StudentDashboard = () => {
             quality: doc.quality
           }));
           setUserData(userDataArray);
-        const averageHours = calculateAverageSleepHours(userDataArray);
-        setAverageSleepHours(averageHours);
-        const averageWakeUp = calculateAverageWakeUpTime(userDataArray);
-        const averageSleep = calculateAverageSleepTime(userDataArray);
-        saveAverageTimes(userId, averageWakeUp.toFixed(2), averageSleep.toFixed(2));
-
+          const averageHours = calculateAverageSleepHours(userDataArray);
+          setAverageSleepHours(averageHours);
+          const averageWakeUp = calculateAverageWakeUpTime(userDataArray);
+          const averageSleep = calculateAverageSleepTime(userDataArray);
+          saveAverageTimes(userId, averageWakeUp.toFixed(2), averageSleep.toFixed(2));
         })
         .catch((error) => console.error('Error fetching user data:', error));
     }
@@ -129,16 +159,16 @@ const StudentDashboard = () => {
         </tbody>
       </Table>
       {averageSleepHours !== null && (
-    <div style={{ fontSize: '2rem', marginTop: '20px' }}>
-      Average Sleep Hours: {averageSleepHours.toFixed(2)} hours
-      <div>
-        Average Wake Up Time: {calculateAverageWakeUpTime(userData)-12} AM
-      </div>
-      <div>
-        Average Sleep Time: {calculateAverageSleepTime(userData)>12 ? calculateAverageSleepTime(userData)-12 :calculateAverageSleepTime(userData)} {calculateAverageSleepTime(userData)>12 ? 'AM' : 'PM'}
-      </div>
-    </div>
-  )}
+        <div style={{ fontSize: '2rem', marginTop: '20px' }}>
+          Average Sleep Hours: {averageSleepHours.toFixed(2)} hours
+          <div>
+            Average Wake Up Time: {convertMilitaryTimeToString(calculateAverageWakeUpTime(userData))}
+          </div>
+          <div>
+            Average Sleep Time: {convertMilitaryTimeToString(calculateAverageSleepTime(userData))}
+          </div>
+        </div>
+      )}
     </Container>
   );
 };
